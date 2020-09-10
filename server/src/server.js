@@ -1,35 +1,10 @@
 const express = require('express');
 const { ApolloServer, gql } = require('apollo-server-express');
+const { schema } = require('./schema/schema.js');
 
-const typeDefs = gql`
-    type Book {
-        title: String
-        author: String
-    }
-
-    type Query { 
-        books: [Book]
-    }
-`;
-const books = [
-    {
-        title: 'Harry Potter and the something somethign',
-        author: 'J.K. Rowling',
-    },
-    {
-        title: 'lordie',
-        author: 'god'
-    },
-];
-
-const resolvers = {
-    Query: {
-        books: () => books,
-    },
-
-};
-
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({ 
+    schema
+});
 
 const app = express();
 
