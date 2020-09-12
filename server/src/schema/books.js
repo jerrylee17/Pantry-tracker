@@ -1,12 +1,19 @@
-const Author = `
+const { gql } = require('apollo-server');
+const { find, filter } = require('lodash');
+const Author = gql`
     type Author {
         id: Int!
         author: String
         books: [Book]
     }
     type Book {
+        id: Int!
+        author: Author
         title: String
-        author: String
+    }
+    type Query {
+        author(id: Int!): Author
+        books: [Book]
     }
 `;
 
@@ -14,36 +21,48 @@ const authors = [
     {
         id: 0,
         author: 'J.K. Rowling',
-        books: [
-            'Harry Potter and the Something',
-            'Lordie and the chamber of secrets'
-        ]
     },
     {
         id: 1,
         author: 'George M. Frost',
-        books: [
-            'The Zombie Knight',
-            'Not the Zombie Knight'
-        ]
     }
 ];
 
 const books = [
     {
+        id: 1,
+        authorId: 0,
         title: 'Harry Potter and the something somethign',
-        author: 'J.K. Rowling',
     },
     {
-        title: 'lordie',
-        author: 'god'
+        id: 2,
+        authorId: 0,
+        title: 'Lordie and the chamber of secrets',
     },
+    {
+        id: 3,
+        authorId: 1,
+        title: 'The Zombie Knight',
+        
+    },
+    {
+        id: 4,
+        authorId: 1,
+        title: 'Not the Zombie Knight'
+    }
 ];
 
 const authorResolvers = {
-    Author : {
-        authors: authors,
-    }
+    Query: {
+        author : (_, { id }) => find(authors, { id }),
+        books : () => books
+    },
+    Author: {
+        books: (author) => filter(books, { authorId: author.id })
+    },
+    Book : {
+        author: (book) => find(authors, { id : book.authorId })
+    },
 };
 
 module.exports = {

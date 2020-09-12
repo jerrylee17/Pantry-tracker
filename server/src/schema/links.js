@@ -1,4 +1,5 @@
-const Links = `
+const { gql } = require('apollo-server');
+const Links = gql`
     type Links {
         id: ID!
         description: String!
@@ -25,9 +26,7 @@ const links = [
 ]
 
 const linksResolvers = {
-    Links : {
-        links: () => links,
-    }
+    Links : () => links,
 }
 
 module.exports = {

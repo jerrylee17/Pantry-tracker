@@ -11,18 +11,22 @@ const {
     authorResolvers,
 } = require('./books.js');
 
-const Query = `
+const Query = gql`
     type Query { 
         author(id: Int!): Author
     }
 `;
 
-const resolvers = {}
+
+const resolvers = merge(authorResolvers, linksResolvers);
 
 const schema = makeExecutableSchema({
-    typeDefs: [ Query, Author, Links ],
-    resolvers: merge(resolvers, authorResolvers, linksResolvers),
+    typeDefs: [ Author, Links ],
+    resolvers: resolvers,
 });
 
+// console.log('schema before sending', schema);
 
 module.exports = schema;
+// exports = { schema };
+
