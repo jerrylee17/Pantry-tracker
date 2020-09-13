@@ -1,11 +1,12 @@
 const express = require('express');
 const { ApolloServer, gql } = require('apollo-server-express');
-const schema = require('./schema/schema.js');
+const schema = require('./schema/index.js');
 
 // console.log('schema from other side', schema);
 const server = new ApolloServer({ 
     schema,
-    playground: true
+    playground: true,
+    introspection: true
 });
 
 const app = express();
