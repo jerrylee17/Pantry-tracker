@@ -6,10 +6,8 @@ const {
     linksResolvers
 } = require('./links.js');
 
-const { 
-    Author,
-    authorResolvers,
-} = require('./books.js');
+const { Author } = require('./books.js');
+const { authorResolvers } = require('./../resolvers/books.js');
 
 const Query = gql`
     type Query { 
