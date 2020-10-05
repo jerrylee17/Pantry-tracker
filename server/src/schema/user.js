@@ -1,14 +1,27 @@
-const { jwt } = require('jsonwebtoken');
-const { AuthenticationError, UserInputError } = require('apollo-server');
+const { User, UserTC } = require('../../model/user');
 
-const userSchema = gql`
-    type User {
-        user_id: Int!
-        username: String!
-        email: String
-        password: String
-        first_name: String
-        last_name: String
-        date_created: String!
-    }
-`;
+const UserQuery = {
+    userById: UserTC.mongooseResolvers.findById(),
+    userByIds: UserTC.mongooseResolvers.findByIds(),
+    userOne: UserTC.mongooseResolvers.findOne(),
+    userMany: UserTC.mongooseResolvers.findMany(),
+    userCount: UserTC.mongooseResolvers.count(),
+    userConnection: UserTC.mongooseResolvers.connection(),
+    userPagination: UserTC.mongooseResolvers.pagination(),
+};
+
+const UserMutation = {
+    userCreateOne: UserTC.mongooseResolvers.createOne(),
+    userCreateMany: UserTC.mongooseResolvers.createMany(),
+    userUpdateById: UserTC.mongooseResolvers.updateById(),
+    userUpdateOne: UserTC.mongooseResolvers.updateOne(),
+    userUpdateMany: UserTC.mongooseResolvers.updateMany(),
+    userRemoveById: UserTC.mongooseResolvers.removeById(),
+    userRemoveOne: UserTC.mongooseResolvers.removeOne(),
+    userRemoveMany: UserTC.mongooseResolvers.removeMany(),
+};
+
+module.exports = {
+    UserQuery,
+    UserMutation,
+};
