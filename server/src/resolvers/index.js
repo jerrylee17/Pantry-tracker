@@ -1,10 +1,9 @@
 
 const { merge } = require('lodash');
 const { authorResolvers } = require('./books.js');
-const { linksResolvers } = require('./links.js');
+const { linkResolvers } = require('./links.js');
 
-
-const resolvers = merge(authorResolvers, linksResolvers);
+const resolvers = merge(authorResolvers, linkResolvers);
 
 module.exports = { 
     resolvers

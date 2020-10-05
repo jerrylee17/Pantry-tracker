@@ -13,7 +13,7 @@ const authorSchema = gql`
         title: String
     }
 
-    type Query {
+    extend type Query {
         author(id: Int!): Author
         books: [Book]
     }
