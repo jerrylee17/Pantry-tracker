@@ -1,31 +1,51 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles'
 import {
-
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  MenuItem,
+  Menu
 } from '@material-ui/core'
+import {
+  AccountCircle
+} from '@material-ui/icons'
+import EmojiFoodBeverageOutlinedIcon from '@material-ui/icons/EmojiFoodBeverageOutlined';
+import clsx from 'clsx'
+import { useHistory } from 'react-router-dom'
 const routes = require('../../Routes.json');
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
+const useStyles = makeStyles({
+  navbarBackground: {
+    backgroundColor: '#9098e0'
   },
   title: {
-    flexGrow: 1,
+    cursor: 'pointer',
   },
-}));
+  navbarFiller: {
+    flexGrow: 1
+  },
+  navbarLink: {
+    cursor: 'pointer',
+    margin: 10,
+    textAlign: 'right',
+    justifyContent: 'space-between'
+  },
+  IconButton: {
+    justifyContent: 'right',
+  },
+  toolbar: {
+    display: 'flex'
+  }
+});
 
 export default function NavBar(props) {
-
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
+  const auth = true
+  const [anchorEl, setAnchorEl] = useState(null);
+  const profileOpen = Boolean(anchorEl);
+  const history = useHistory()
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -34,35 +54,67 @@ export default function NavBar(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const routeChange = (path) => {
+    history.push(path)
+  }
+
   return (
     <>
-      <FormGroup>
-        <FormControlLabel
-          control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
-          label={auth ? 'Logout' : 'Login'}
-        />
-      </FormGroup>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
+      <AppBar position="static" className={classes.navbarBackground}>
+        <Toolbar className={classes.toolbar}>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+            onClick={() => routeChange('/')}
+          >
+            <EmojiFoodBeverageOutlinedIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Photos
+          <Typography
+            variant="h6"
+            className={classes.title}
+            onClick={() => routeChange('/')}
+            align='left'
+          >
+            What's in your pantry?
           </Typography>
+          <div className={classes.navbarFiller}></div>
+          {routes.Routes.map((route, index) => {
+            if (
+              route.Navbar &&
+              route.Navbar === 'Yes' &&
+              (!route.NavbarPos || route.NavbarPos !== 'Profile')
+            ) {
+              return (
+                <Typography
+                  variant='subtitle1'
+                  key={index}
+                  onClick={() => routeChange(route.Route)}
+                  className={classes.navbarLink}
+                >
+                  {route.Name}
+                </Typography>
+              )
+            }
+            return true
+          })}
+          {/* Things to display when logged in */}
           {auth && (
-            <div>
+            <>
               <IconButton
                 aria-label="account of current user"
-                aria-controls="menu-appbar"
+                aria-controls="navbar"
                 aria-haspopup="true"
                 onClick={handleMenu}
                 color="inherit"
+                className={clsx(classes.IconButton)}
               >
                 <AccountCircle />
               </IconButton>
               <Menu
-                id="menu-appbar"
+                id="navbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
                   vertical: 'top',
@@ -73,13 +125,32 @@ export default function NavBar(props) {
                   vertical: 'top',
                   horizontal: 'right',
                 }}
-                open={open}
+                open={profileOpen}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                {routes.Routes.map((route, index) => {
+                  if (
+                    route.Navbar &&
+                    route.Navbar === "Yes" &&
+                    route.NavbarPos &&
+                    route.NavbarPos === "Profile"
+                  ) {
+                    return (
+                      <MenuItem
+                        key={index}
+                        onClick={() => {
+                          handleClose()
+                          routeChange(route.Route)
+                        }}
+                      >
+                        {route.Name}
+                      </MenuItem>
+                    )
+                  }
+                  return true
+                })}
               </Menu>
-            </div>
+            </>
           )}
         </Toolbar>
       </AppBar>
@@ -88,13 +159,3 @@ export default function NavBar(props) {
 }
 
 
-{/* {routes.Routes.map((object, index) => {
-        if (object.Navbar === "Yes") {
-          return (
-            <NavItem key={index}>
-              <NavLink href={object.Route}>{object.Name}</NavLink>
-            </NavItem>
-          )
-        }
-        return true
-      })} */}
