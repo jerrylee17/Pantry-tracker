@@ -1,12 +1,23 @@
-const { makeExecutableSchema } = require('apollo-server');
+const  { schemaComposer } = require('graphql-compose');
 
-const { linkSchema } = require('./links.js');
-const { authorSchema } = require('./books.js');
-const { resolvers } = require ('./../resolvers/index.js');
+const { UserQuery, UserMutation } = require('./user');
+const { PantryQuery, PantryMutation } = require('./pantry');
+const { ContentsQuery, ContentsMutation } = require('./contents');
 
-const schema = makeExecutableSchema({
-    typeDefs: [ authorSchema, linkSchema ],
-    resolvers: resolvers,
+
+schemaComposer.Query.addFields({
+    ...UserQuery,
+    ...PantryQuery,
+    ...ContentsQuery,
 });
 
-module.exports = schema;
+schemaComposer.Mutation.addFields({
+    ...UserMutation,
+    ...PantryMutation,
+    ...ContentsMutation,
+});
+const schema = schemaComposer.buildSchema();
+
+module.exports = {
+    schema
+};
