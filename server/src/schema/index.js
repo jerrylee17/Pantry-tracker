@@ -1,9 +1,8 @@
 const  { schemaComposer } = require('graphql-compose');
 
-const { UserQuery, UserMutation } = require('./user');
-const { PantryQuery, PantryMutation } = require('./pantry');
-const { ContentsQuery, ContentsMutation } = require('./contents');
-
+const { UserQuery, UserMutation } = require('./user.js');
+const { PantryQuery, PantryMutation } = require('./pantry.js');
+const { ContentsQuery, ContentsMutation } = require('./contents.js');
 
 schemaComposer.Query.addFields({
     ...UserQuery,
@@ -16,6 +15,7 @@ schemaComposer.Mutation.addFields({
     ...PantryMutation,
     ...ContentsMutation,
 });
+
 const schema = schemaComposer.buildSchema();
 
 module.exports = {

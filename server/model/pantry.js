@@ -1,12 +1,9 @@
 const mongoose = require('mongoose');
 const timestamps = require('mongoose-timestamp');
-const { composeWithMongoose } = require('graphql-compose-mongoose');
+const { composeMongoose } = require('graphql-compose-mongoose');
 
 const PantrySchema = new mongoose.Schema(
     {
-        _id: {
-            type: String,
-        },
         name: {
             type: String,
             required: true,
@@ -29,10 +26,10 @@ PantrySchema.index({ createdAt: 1, updatedAt: 1 })
 
 
 const Pantry = mongoose.model('Pantry', PantrySchema);
-const PantryTC = composeWithMongoose(Pantry);
+const PantryTC = composeMongoose(Pantry);
 
 module.exports = {
     PantrySchema,
     Pantry,
     PantryTC
-}
+};

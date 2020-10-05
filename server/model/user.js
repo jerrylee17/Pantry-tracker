@@ -1,13 +1,10 @@
 const mongoose = require('mongoose');
 const timestamps = require('mongoose-timestamp');
-const { composeWithMongoose } = require('graphql-compose-mongoose');
+const { composeMongoose } = require('graphql-compose-mongoose');
 const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema(
     {
-        _id : {
-            type: String,
-        },
         name: {
             type: String,
             required: true,
@@ -51,10 +48,10 @@ UserSchema.pre('save', () => {
 });
 
 const User = mongoose.model('User', UserSchema);
-const UserTC = composeWithMongoose(User);
+const UserTC = composeMongoose(User);
 
 module.exports = {
     UserSchema,
     User,
     UserTC
-}
+};

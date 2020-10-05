@@ -1,27 +1,27 @@
 const { Contents, ContentsTC } = require('../../model/contents');
 
-const contentsQuery = {
-    contentsById: ContentsTC.getResolver('findById'),
-    contentsByIds: ContentsTC.getResolver('findByIds'),
-    contentsOne: ContentsTC.getResolver('findOne'),
-    contentsMany: ContentsTC.getResolver('findMany'),
-    contentsCount: ContentsTC.getResolver('count'),
-    contentsConnection: ContentsTC.getResolver('connection'),
-    contentsPagination: ContentsTC.getResolver('pagination'),
+const ContentsQuery = {
+    contentsById: ContentsTC.mongooseResolvers.findById(),
+    contentsByIds: ContentsTC.mongooseResolvers.findByIds(),
+    contentsOne: ContentsTC.mongooseResolvers.findOne(),
+    contentsMany: ContentsTC.mongooseResolvers.findMany(),
+    contentsCount: ContentsTC.mongooseResolvers.count(),
+    contentsConnection: ContentsTC.mongooseResolvers.connection(),
+    contentsPagination: ContentsTC.mongooseResolvers.pagination(),
 };
 
-const contentsMutation = {
-    contentsCreateOne: ContentsTC.getResolver('createOne'),
-    contentsCreateMany: ContentsTC.getResolver('createMany'),
-    contentsUpdateById: ContentsTC.getResolver('updateById'),
-    contentsUpdateOne: ContentsTC.getResolver('updateOne'),
-    contentsUpdateMany: ContentsTC.getResolver('updateMany'),
-    contentsRemoveById: ContentsTC.getResolver('removeById'),
-    contentsRemoveOne: ContentsTC.getResolver('removeOne'),
-    contentsRemoveMany: ContentsTC.getResolver('removeMany'),
+const ContentsMutation = {
+    contentsCreateOne: ContentsTC.mongooseResolvers.createOne(),
+    contentsCreateMany: ContentsTC.mongooseResolvers.createMany(),
+    contentsUpdateById: ContentsTC.mongooseResolvers.updateById(),
+    contentsUpdateOne: ContentsTC.mongooseResolvers.updateOne(),
+    contentsUpdateMany: ContentsTC.mongooseResolvers.updateMany(),
+    contentsRemoveById: ContentsTC.mongooseResolvers.removeById(),
+    contentsRemoveOne: ContentsTC.mongooseResolvers.removeOne(),
+    contentsRemoveMany: ContentsTC.mongooseResolvers.removeMany(),
 };
 
 module.exports = {
-    contentsQuery,
-    contentsMutation
-}
+    ContentsQuery,
+    ContentsMutation
+};

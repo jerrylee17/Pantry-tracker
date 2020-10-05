@@ -1,28 +1,27 @@
 const { Pantry, PantryTC } = require('../../model/pantry');
 
-const pantryQuery = {
-    pantryById: PantryTC.getResolver('findById'),
-    pantryByIds: PantryTC.getResolver('findByIds'),
-    pantryOne: PantryTC.getResolver('findOne'),
-    pantryMany: PantryTC.getResolver('findMany'),
-    pantryCount: PantryTC.getResolver('count'),
-    pantryConnection: PantryTC.getResolver('connection'),
-    pantryPagination: PantryTC.getResolver('pagination'),
+const PantryQuery = {
+    pantryById: PantryTC.mongooseResolvers.findById(),
+    pantryByIds: PantryTC.mongooseResolvers.findByIds(),
+    pantryOne: PantryTC.mongooseResolvers.findOne(),
+    pantryMany: PantryTC.mongooseResolvers.findMany(),
+    pantryCount: PantryTC.mongooseResolvers.count(),
+    pantryConnection: PantryTC.mongooseResolvers.connection(),
+    pantryPagination: PantryTC.mongooseResolvers.pagination(),
 };
 
-const pantryMutation = {
-    pantryCreateOne: PantryTC.getResolver('createOne'),
-    pantryCreateMany: PantryTC.getResolver('createMany'),
-    pantryUpdateById: PantryTC.getResolver('updateById'),
-    pantryUpdateOne: PantryTC.getResolver('updateOne'),
-    pantryUpdateMany: PantryTC.getResolver('updateMany'),
-    pantryRemoveById: PantryTC.getResolver('removeById'),
-    pantryRemoveOne: PantryTC.getResolver('removeOne'),
-    pantryRemoveMany: PantryTC.getResolver('removeMany'),
+const PantryMutation = {
+    pantryCreateOne: PantryTC.mongooseResolvers.createOne(),
+    pantryCreateMany: PantryTC.mongooseResolvers.createMany(),
+    pantryUpdateById: PantryTC.mongooseResolvers.updateById(),
+    pantryUpdateOne: PantryTC.mongooseResolvers.updateOne(),
+    pantryUpdateMany: PantryTC.mongooseResolvers.updateMany(),
+    pantryRemoveById: PantryTC.mongooseResolvers.removeById(),
+    pantryRemoveOne: PantryTC.mongooseResolvers.removeOne(),
+    pantryRemoveMany: PantryTC.mongooseResolvers.removeMany(),
 };
 
 module.exports = {
-    pantryQuery,
-    pantryMutation
-}
-
+    PantryQuery,
+    PantryMutation
+};

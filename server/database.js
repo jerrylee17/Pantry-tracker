@@ -6,12 +6,11 @@ const url = `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.e
 
 mongoose.connect(url, { 
     autoIndex: true,
-    reconnectTries: Number.MAX_VALUE,
-    reconnectInterval: 500,
     poolSize: 50,
     bufferMaxEntries: 0,
     keepAlive: 120,
     useNewUrlParser: true,
+    useUnifiedTopology: true,
 });
 
 mongoose.set('useCreateIndex', true);
