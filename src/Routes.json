@@ -1,0 +1,32 @@
+{
+    "Routes": [
+        {
+            "Name": "Home",
+            "Route": "/",
+            "Navbar": "No"
+        },
+        {
+            "Name": "Dashboard",
+            "Route": "/dashboard",
+            "Navbar": "Yes"
+        },
+        {
+            "Name": "Profile",
+            "Route": "/profile",
+            "Navbar": "Yes",
+            "NavbarPos": "Profile"
+        },
+        {
+            "Name": "Account",
+            "Route": "/account",
+            "Navbar": "Yes",
+            "NavbarPos": "Profile"
+        },
+        {
+            "Name": "About Us",
+            "Route": "/about",
+            "Navbar": "Yes",
+            "filePath": "About"
+        }
+    ]
+}
