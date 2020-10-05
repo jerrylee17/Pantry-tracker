@@ -1,0 +1,20 @@
+{
+    "Routes": [
+        {
+            "Name": "Home",
+            "Route": "/",
+            "Navbar": "No"
+        },
+        {
+            "Name": "Dashboard",
+            "Route": "/dashboard",
+            "Navbar": "Yes"
+        },
+        {
+            "Name": "About Us",
+            "Route": "/about",
+            "Navbar": "Yes",
+            "filePath": "About"
+        }
+    ]
+}
