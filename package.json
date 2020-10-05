@@ -10,7 +10,6 @@
     "@testing-library/user-event": "^7.2.1",
     "apollo-server": "^2.18.1",
     "apollo-server-express": "^2.18.1",
-    "bootstrap": "^4.5.2",
     "clsx": "^1.1.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
