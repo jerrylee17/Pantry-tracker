@@ -47,7 +47,6 @@ const authorResolvers = {
     },
 };
 
-module.exports = {
-    authorResolvers
+module.exports = { 
+    authorResolvers 
 };
-

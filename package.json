@@ -9,19 +9,23 @@
     "apollo-server": "^2.18.1",
     "apollo-server-express": "^2.18.1",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "graphql": "^15.3.0",
     "lodash": "^4.17.20",
+    "nodemon": "^2.0.4",
     "pg": "^8.3.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "sequelize": "^6.3.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "nodemon ./server/src/server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
