@@ -57,7 +57,7 @@ export default function NavBar(props) {
 
   const routeChange = (path) => {
     history.push(path)
-  }
+  };
 
   return (
     <>
