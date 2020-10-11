@@ -1,11 +1,70 @@
 import React from 'react';
+import { aboutData } from './About-data';
+import { makeStyles } from '@material-ui/core/styles';
+import { Paper } from '@material-ui/core';
+
+
+function importAll(r) {
+  let images = {};
+  r.keys().map((item, index) => {
+    images[item.replace('./', '')] = r(item);
+    return true;
+  });
+  return images;
+}
+var images = importAll(require.context('./images', true, /\.(png|jpe?g|svg)$/));
+console.log(images);
+
+const useStyles = makeStyles((theme) => ({
+  header: {
+    textAlign: 'center'
+  },
+  description: {
+    margin: theme.spacing(4),
+    textAlign: 'center'
+  },
+  memberPaper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start',
+    '& > *': {
+      margin: theme.spacing(5),
+      padding: theme.spacing(3),
+      width: theme.spacing(40),
+      height: theme.spacing(40),
+      textAlign: 'center',
+    },
+  },
+  memberPaperWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+}))
 
 export default function About() {
-    return (
-        <div className='page-background'>
-            <h1>About</h1>
-      Coming soon!
+  const classes = useStyles();
+  return (
+    <>
+      <h1 className={classes.header}>About</h1>
+      <div className={classes.description}>
+        {aboutData.projectDescription}
+      </div>
+      <div className={classes.memberPaperWrapper}>
+        <div className={classes.memberPaper}>
+          {aboutData.members.map((member, index) => (
+            <Paper elevation={3}>
+              <img
+                src={images[member.picture]}
+                alt={member.name}
+              />
+              <h4>{member.name}</h4>
+              {member.description}
+            </Paper>
+          ))}
         </div>
-    );
+      </div>
+
+    </>
+  );
 }
 
