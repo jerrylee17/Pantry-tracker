@@ -24,9 +24,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center'
   },
   memberPaper: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(448px, max-content))',
+    justifyContent: 'center',
     '& > *': {
       margin: theme.spacing(5),
       padding: theme.spacing(3),
@@ -34,10 +34,6 @@ const useStyles = makeStyles((theme) => ({
       height: theme.spacing(40),
       textAlign: 'center',
     },
-  },
-  memberPaperWrapper: {
-    display: 'flex',
-    justifyContent: 'center',
   },
 }))
 
@@ -49,21 +45,18 @@ export default function About() {
       <div className={classes.description}>
         {aboutData.projectDescription}
       </div>
-      <div className={classes.memberPaperWrapper}>
-        <div className={classes.memberPaper}>
-          {aboutData.members.map((member, index) => (
-            <Paper elevation={3}>
-              <img
-                src={images[member.picture]}
-                alt={member.name}
-              />
-              <h4>{member.name}</h4>
-              {member.description}
-            </Paper>
-          ))}
-        </div>
+      <div className={classes.memberPaper}>
+        {aboutData.members.map((member, index) => (
+          <Paper elevation={3}>
+            <img
+              src={images[member.picture]}
+              alt={member.name}
+            />
+            <h4>{member.name}</h4>
+            {member.description}
+          </Paper>
+        ))}
       </div>
-
     </>
   );
 }
