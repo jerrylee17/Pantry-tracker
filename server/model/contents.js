@@ -20,7 +20,7 @@ const ContentsSchema = new mongoose.Schema(
         },
     },
     {
-        collection: 'Contents'
+        collection: 'contents'
     }
 );
 

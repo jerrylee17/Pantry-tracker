@@ -11,12 +11,13 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 // this link is a link to our graphql api, it creates the connection for the
 // frontend to our backend api
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000'
+  uri: 'http://localhost:4000/graphql'
 });
 
 const client = new ApolloClient({
   link: httpLink,
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  credentials: 'include'
 });
 
 

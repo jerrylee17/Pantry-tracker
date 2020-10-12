@@ -2,6 +2,23 @@ const { Contents, ContentsTC } = require('./contents');
 const { Pantry, PantryTC } = require('./pantry')
 const { User, UserTC } = require('./user');
 
+// our current mongoose schema saves the relations (1-1, 1-N, M-N) between
+// different entities by saving their object id so we can reference them later
+//
+//     i.e.
+//     User {
+//         name
+//         username
+//         password
+//         email
+//         pantries [ PantryObjectIDs... ]
+//     }
+//
+// this is a problem because we're using graphql, we can't use the .populate()
+// function that monggoose supports for this problem that we might if we were 
+// using a REST API setup so we need to load the data and then populate it with 
+// the id's as done below
+
 UserTC.addRelation(
     'pantries',
     {
@@ -24,7 +41,6 @@ ContentsTC.addRelation(
     }
 );
 
-// console.log(PantryTC);
 PantryTC.addRelation(
     'owner',
     {

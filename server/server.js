@@ -1,6 +1,7 @@
 const express = require('express');
 const { ApolloServer, gql } = require('apollo-server-express');
 const { schema } = require('./src/schema/index.js');
+const cors = require('cors');
 
 require('dotenv').config();
 require('./database.js');
@@ -9,11 +10,11 @@ require('./database.js');
 const server = new ApolloServer({ 
     schema,
     playground: true,
-    introspection: true
+    introspection: true,
 });
 
 const app = express();
-
+app.use(cors());
 server.applyMiddleware({ app });
 
 app.listen({ port:4000 }, () =>

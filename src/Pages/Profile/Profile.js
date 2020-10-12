@@ -8,8 +8,9 @@ import {
 } from '@material-ui/core';
 import { deepPurple } from '@material-ui/core/colors';
 import PantryCard from './PantryCard'
-
-
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
 const useStyles = makeStyles((theme) => ({
   profileText: {
     textAlign: 'center'
@@ -50,59 +51,85 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }))
-
-const user = {
-  name: "Jerry Lee",
-  username: "jerrylee17",
-  pasword: "verysecret",
-  email: "jerrysemailhaha@gmail.com",
-  pantries: [
-    {
-      name: 'Fridge',
-      contents: [
-        {
-          name: 'Milk',
-          count: 2
-        },
-        {
-          name: 'Cheese',
-          count: 5
-        }
-      ]
-    },
-    {
-      name: 'Snacks',
-      contents: [
-        {
-          name: 'doritos',
-          count: 2
-        },
-        {
-          name: 'cookies',
-          count: 8
-        }
-      ]
-    },
-    {
-      name: 'Dog food',
-      contents: [
-        {
-          name: 'Bones',
-          count: 2
-        },
-        {
-          name: 'Snacks',
-          count: 8
-        }
-      ]
+const USER_QUERY = gql`
+query getUser {
+  userMany {
+    name
+    username
+    email
+    pantries {
+      name
+      contents {
+        name
+        count
+      }
     }
-  ]
+  }
 }
+`
+// const user = {
+//   name: "Jerry Lee",
+//   username: "jerrylee17",
+//   pasword: "verysecret",
+//   email: "jerrysemailhaha@gmail.com",
+//   pantries: [
+//     {
+//       name: 'Fridge',
+//       contents: [
+//         {
+//           name: 'Milk',
+//           count: 2
+//         },
+//         {
+//           name: 'Cheese',
+//           count: 5
+//         }
+//       ]
+//     },
+//     {
+//       name: 'Snacks',
+//       contents: [
+//         {
+//           name: 'doritos',
+//           count: 2
+//         },
+//         {
+//           name: 'cookies',
+//           count: 8
+//         }
+//       ]
+//     },
+//     {
+//       name: 'Dog food',
+//       contents: [
+//         {
+//           name: 'Bones',
+//           count: 2
+//         },
+//         {
+//           name: 'Snacks',
+//           count: 8
+//         }
+//       ]
+//     }
+//   ]
+// }
 
 
 export default function Profile() {
   const classes = useStyles();
-
+  const { data, loading, error } = useQuery(USER_QUERY);
+  if (loading) {
+    return (
+      <p>Loading...</p>
+    );
+  }
+  if (error) {
+    return (
+      <p>Error</p>
+    );
+  }
+  const user = data.userMany[0];
   return (
     <>
       <h1 className={clsx(classes.profileText)}>Profile</h1>
