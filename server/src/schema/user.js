@@ -1,4 +1,5 @@
-const { User, UserTC } = require('../../model/user');
+const { User, UserTC } = require('../../model/preloader');
+
 
 const UserQuery = {
     userById: UserTC.mongooseResolvers.findById(),

@@ -25,12 +25,12 @@ const UserSchema = new mongoose.Schema(
         pantries: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'pantry',
+                ref: 'Pantry',
             },
         ]
     },
     {
-        collection: 'users'
+        collection: 'Users'
     }
 );
 
