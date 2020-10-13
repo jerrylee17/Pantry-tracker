@@ -12,7 +12,6 @@ const ContentsSchema = new mongoose.Schema(
         name: {
             type: String,
             required: true,
-            unique: true,
         },
         count: {
             type: Number,
