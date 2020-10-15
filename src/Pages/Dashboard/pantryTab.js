@@ -10,6 +10,7 @@ import {
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import RefreshIcon from '@material-ui/icons/Refresh';
 import { purple } from '@material-ui/core/colors';
+import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -21,14 +22,21 @@ const useStyles = makeStyles((theme) => ({
     margin: 'auto'
   },
   refreshButton: {
-    position: 'absolute',
-    top: '5vh',
-    right: '8vw',
     color: theme.palette.getContrastText(purple[200]),
     backgroundColor: purple[200],
     '&:hover': {
       color: theme.palette.getContrastText(purple[600]),
       backgroundColor: purple[600],
+    }
+  },
+  refreshButtonPosition: {
+    [theme.breakpoints.up('md')]: {
+      position: 'absolute',
+      top: '5vh',
+      right: '8vw',
+    },
+    [theme.breakpoints.down('md')]: {
+      marginBottom: '2vh'
     }
   }
 }))
@@ -61,7 +69,12 @@ export default function PantryTab(props) {
   return (
     <>
       <h2 className={classes.title}>{name}</h2>
-      <Button className={classes.refreshButton}>
+      <Button
+        className={clsx(
+          classes.refreshButton,
+          classes.refreshButtonPosition
+        )}
+      >
         <Hidden mdDown>
           Refresh pantry
         </Hidden>
