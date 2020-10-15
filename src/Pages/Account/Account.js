@@ -1,5 +1,7 @@
 import { Button, makeStyles, Paper, TextField } from '@material-ui/core';
 import React from 'react';
+import { useQuery } from '@apollo/react-hooks'
+import { USER_QUERY } from '../../APIFunctions/user'
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -29,77 +31,38 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const user = {
-  name: "Jerry Lee",
-  email: "jerry.lee@sjsu.edu",
-  username: "jerrylee",
-  password: "jerry123",
-  pantries: [
-    {
-      name: "Fridge",
-      contents: [
-        {
-          name: "yogurt",
-          count: 5
-        },
-        {
-          name: "Eggs",
-          count: 50
-        },
-        {
-          name: "Hummus",
-          count: 4
-        },
-        {
-          name: "Milk",
-          count: 11
-        },
-        {
-          name: "Halal Chicken",
-          count: 1
-        }
-      ]
-    },
-    {
-      name: "Snacks",
-      contents: [
-        {
-          name: "doritos",
-          count: 8
-        },
-        {
-          name: "poqitos",
-          count: 9
-        },
-        {
-          name: "marshmallows",
-          count: 2
-        }
-      ]
-    },
-    {
-      name: "Dog food",
-      contents: [
-        {
-          name: "canned dog food",
-          count: 5
-        },
-        {
-          name: "beef jerky",
-          count: 5
-        }
-      ]
-    }
-  ]
-}
-
-export default function Account() {
+export default function Account(props) {
   const classes = useStyles();
+  const {
+    data,
+    loading,
+    error
+  } = useQuery(USER_QUERY);
+  if (loading) {
+    return (
+      <p>Loading...</p>
+    );
+  }
+  if (error) {
+    return (
+      <p>Error</p>
+    );
+  }
+  const user = data.userMany[0];
   return (
     <>
       <h1 className={classes.header}>Account Settings</h1>
       <Paper className={classes.paper}>
         <div className={classes.inputFieldsWrapper}>
+          <TextField
+            className={classes.inputFields}
+            label='Change Nme'
+            defaultValue={user.name}
+            variant='outlined'
+            inputProps={{ maxLength: 20 }}
+            shrink
+          />
+          <div className={classes.newLine} />
           <TextField
             className={classes.inputFields}
             label='Change username'

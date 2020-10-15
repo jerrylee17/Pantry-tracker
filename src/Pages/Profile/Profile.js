@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-export default function Profile() {
+export default function Profile(props) {
   const classes = useStyles();
   const { data, loading, error } = useQuery(USER_QUERY);
   if (loading) {
