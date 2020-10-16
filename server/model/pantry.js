@@ -24,7 +24,7 @@ const PantrySchema = new mongoose.Schema(
         ],
     },
     {
-        collection: 'pantries'
+        collection: 'Pantries'
     }
 );
 
