@@ -81,9 +81,6 @@ export default function VerticalTabs(props) {
             <Tab label={
               <>
                 <Typography variant='h5'>
-                  <Hidden xsDown>
-                    {`${index + 1}. `}
-                  </Hidden>
                   {` ${pantry.name}`}
                 </Typography>
                 <Hidden xsDown>

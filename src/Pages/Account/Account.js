@@ -56,7 +56,7 @@ export default function Account(props) {
         <div className={classes.inputFieldsWrapper}>
           <TextField
             className={classes.inputFields}
-            label='Change Nme'
+            label='Change Name'
             defaultValue={user.name}
             variant='outlined'
             inputProps={{ maxLength: 20 }}
@@ -102,6 +102,7 @@ export default function Account(props) {
           >
             Submit
           </Button>
+          <div className={classes.newLine} />
         </div>
       </Paper>
     </>
