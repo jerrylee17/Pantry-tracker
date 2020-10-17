@@ -4,25 +4,25 @@ const { composeMongoose } = require('graphql-compose-mongoose');
 
 const UserPantriesSchema = new mongoose.Schema(
     {
-        user_id: {
+        user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Users'
         },
-        pantry_id: {
+        pantry: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Pantry',
         },
     },
     {
-        collection: 'Users_Pantries'
+        collection: 'UserPantries'
     }
 );
 
 UserPantriesSchema.plugin(timestamps);
 UserPantriesSchema.index({ createdAt: 1, updatedAt: 1 })
 
-const UserPantries = mongoose.model('User', UserPantriesSchema);
-const UserPantriesTC = composeMongoose(User);
+const UserPantries = mongoose.model('UserPantries', UserPantriesSchema);
+const UserPantriesTC = composeMongoose(UserPantries);
 
 module.exports = {
     UserPantriesSchema,
