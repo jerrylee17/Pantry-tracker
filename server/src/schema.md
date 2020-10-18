@@ -14,7 +14,7 @@ Pantry
 - _id: ObjectID
 - owner: [ObjectID] -> user
 - name: String!
-- contents: ObjectID -> contents
+- contents: [ObjectID] -> contents
 - createdAt: String
 - updatedAt: String
 
