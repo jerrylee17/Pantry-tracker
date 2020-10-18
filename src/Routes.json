@@ -8,25 +8,27 @@
         {
             "Name": "Dashboard",
             "Route": "/dashboard",
-            "Navbar": "Yes"
-        },
-        {
-            "Name": "Profile",
-            "Route": "/profile",
             "Navbar": "Yes",
-            "NavbarPos": "Profile"
-        },
-        {
-            "Name": "Account",
-            "Route": "/account",
-            "Navbar": "Yes",
-            "NavbarPos": "Profile"
+            "Auth": "Yes"
         },
         {
             "Name": "About Us",
             "Route": "/about",
             "Navbar": "Yes",
-            "filePath": "About"
+            "filePath": "About",
+            "Auth": "No"
+        },
+        {
+            "Name": "Profile",
+            "Route": "/profile",
+            "Navbar": "Yes",
+            "Auth": "Profile"
+        },
+        {
+            "Name": "Account",
+            "Route": "/account",
+            "Navbar": "Yes",
+            "Auth": "Profile"
         }
     ]
 }

@@ -6,7 +6,7 @@ import {
   Typography,
   IconButton,
   MenuItem,
-  Menu
+  Menu, Button
 } from '@material-ui/core'
 import {
   AccountCircle
@@ -14,9 +14,11 @@ import {
 import EmojiFoodBeverageOutlinedIcon from '@material-ui/icons/EmojiFoodBeverageOutlined';
 import clsx from 'clsx'
 import { useHistory } from 'react-router-dom'
+import { indigo } from '@material-ui/core/colors';
+import LoginModal from './LoginModal';
 const routes = require('../../Routes.json');
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   navbarBackground: {
     backgroundColor: '#9098e0'
   },
@@ -37,13 +39,23 @@ const useStyles = makeStyles({
   },
   toolbar: {
     display: 'flex'
+  },
+  LoginButton: {
+    justifyContent: 'right',
+    backgroundColor: indigo[500],
+    color: theme.palette.getContrastText(indigo[500]),
+    '&:hover': {
+      backgroundColor: indigo[100],
+      color: theme.palette.getContrastText(indigo[100]),
+    }
   }
-});
+}));
 
 export default function NavBar(props) {
   const classes = useStyles();
   const auth = true
   const [anchorEl, setAnchorEl] = useState(null);
+  const [modal, setModal] = useState(false);
   const profileOpen = Boolean(anchorEl);
   const history = useHistory()
 
@@ -59,6 +71,17 @@ export default function NavBar(props) {
     history.push(path)
   };
 
+  const closeModal = () => {
+    setModal(false)
+  }
+  const openModal = () => {
+    setModal(true)
+  }
+
+  const modalProps = {
+    open: modal,
+    onClose: closeModal
+  }
   return (
     <>
       <AppBar position="static" className={classes.navbarBackground}>
@@ -81,11 +104,12 @@ export default function NavBar(props) {
             What's in your pantry?
           </Typography>
           <div className={classes.navbarFiller}></div>
+          {/* Routes seen by logged in and not logged in users */}
           {routes.Routes.map((route, index) => {
             if (
               route.Navbar &&
               route.Navbar === 'Yes' &&
-              (!route.NavbarPos || route.NavbarPos !== 'Profile')
+              (!route.Auth || route.Auth === 'No')
             ) {
               return (
                 <Typography
@@ -100,7 +124,37 @@ export default function NavBar(props) {
             }
             return true
           })}
-          {/* Things to display when logged in */}
+          {/* Logged in routes */}
+          {auth && routes.Routes.map((route, index) => {
+            if (
+              route.Navbar &&
+              route.Navbar === 'Yes' &&
+              (!route.Auth || route.Auth === 'Yes')
+            ) {
+              return (
+                <Typography
+                  variant='subtitle1'
+                  key={index}
+                  onClick={() => routeChange(route.Route)}
+                  className={classes.navbarLink}
+                >
+                  {route.Name}
+                </Typography>
+              )
+            }
+            return true
+          })}
+          {!auth && (
+            <>
+              <Button
+                className={classes.LoginButton}
+                onClick={openModal}
+              >
+                Log in
+              </Button>
+            </>
+          )}
+          {/* Logged in profile */}
           {auth && (
             <>
               <IconButton
@@ -132,8 +186,8 @@ export default function NavBar(props) {
                   if (
                     route.Navbar &&
                     route.Navbar === "Yes" &&
-                    route.NavbarPos &&
-                    route.NavbarPos === "Profile"
+                    route.Auth &&
+                    route.Auth === "Profile"
                   ) {
                     return (
                       <MenuItem
@@ -154,6 +208,7 @@ export default function NavBar(props) {
           )}
         </Toolbar>
       </AppBar>
+      <LoginModal {...modalProps} />
     </>
   );
 }
