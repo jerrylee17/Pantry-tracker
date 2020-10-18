@@ -11,7 +11,12 @@ import {
   Collapse,
   CardActions,
   Menu,
-  MenuItem, Table, TableHead, TableRow, TableCell, TableBody
+  MenuItem,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody
 } from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -42,9 +47,6 @@ const useStyles = makeStyles((theme) => ({
   delete: {
     color: red[800]
   },
-  table: {
-
-  }
 }))
 
 const StyledTableCell = withStyles((theme) => ({
