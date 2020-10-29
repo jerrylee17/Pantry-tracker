@@ -12,8 +12,8 @@ function importAll(r) {
   });
   return images;
 }
-var images = importAll(require.context('./images', true, /\.(png|jpe?g|svg)$/));
-console.log(images);
+let images = importAll(require.context('./images', true, /\.(png|jpe?g|svg)$/));
+// console.log(images);
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
       textAlign: 'center',
     },
   },
-}))
+}));
 
 export default function About(props) {
   const classes = useStyles();

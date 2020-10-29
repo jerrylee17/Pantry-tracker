@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   Table,
   TableHead,
@@ -7,7 +7,7 @@ import {
   TableBody,
   Button, Hidden
 } from '@material-ui/core';
-import { makeStyles, withStyles } from '@material-ui/core/styles'
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import { purple } from '@material-ui/core/colors';
 import clsx from 'clsx';
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: '2vh'
     }
   }
-}))
+}));
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -97,5 +97,5 @@ export default function PantryTab(props) {
         </TableBody>
       </Table>
     </>
-  )
+  );
 }

@@ -5,9 +5,9 @@ import {
   Switch,
   Redirect
 } from 'react-router-dom';
-import NavBarWrapper from './Components/Navbar/NavbarWrapper'
+import NavBarWrapper from './Components/Navbar/NavbarWrapper';
 
-var allRoutes = require('./Routes.json');
+let allRoutes = require('./Routes.json');
 function importComponents(routes) {
   let newRoutes = routes.map((item) => {
     let Name = item.filePath ? item.filePath : item.Name;
@@ -15,10 +15,10 @@ function importComponents(routes) {
       ...item,
       path: item.Route,
       Component: require(`./Pages/${Name}/${Name}.js`).default
-    }
-    return object
-  })
-  return newRoutes
+    };
+    return object;
+  });
+  return newRoutes;
 }
 
 export default function Routing({ appProps }) {

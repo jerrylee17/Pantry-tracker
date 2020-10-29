@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles';
 import {
   AppBar,
   Toolbar,
@@ -7,13 +7,13 @@ import {
   IconButton,
   MenuItem,
   Menu, Button
-} from '@material-ui/core'
+} from '@material-ui/core';
 import {
   AccountCircle
-} from '@material-ui/icons'
+} from '@material-ui/icons';
 import EmojiFoodBeverageOutlinedIcon from '@material-ui/icons/EmojiFoodBeverageOutlined';
-import clsx from 'clsx'
-import { useHistory } from 'react-router-dom'
+import clsx from 'clsx';
+import { useHistory } from 'react-router-dom';
 import { indigo } from '@material-ui/core/colors';
 import LoginModal from './LoginModal';
 const routes = require('../../Routes.json');
@@ -53,11 +53,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavBar(props) {
   const classes = useStyles();
-  const auth = true
+  const auth = true;
   const [anchorEl, setAnchorEl] = useState(null);
   const [modal, setModal] = useState(false);
   const profileOpen = Boolean(anchorEl);
-  const history = useHistory()
+  const history = useHistory();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -68,20 +68,20 @@ export default function NavBar(props) {
   };
 
   const routeChange = (path) => {
-    history.push(path)
+    history.push(path);
   };
 
   const closeModal = () => {
-    setModal(false)
-  }
+    setModal(false);
+  };
   const openModal = () => {
-    setModal(true)
-  }
+    setModal(true);
+  };
 
   const modalProps = {
     open: modal,
     onClose: closeModal
-  }
+  };
   return (
     <>
       <AppBar position="static" className={classes.navbarBackground}>
@@ -120,9 +120,9 @@ export default function NavBar(props) {
                 >
                   {route.Name}
                 </Typography>
-              )
+              );
             }
-            return true
+            return true;
           })}
           {/* Logged in routes */}
           {auth && routes.Routes.map((route, index) => {
@@ -140,9 +140,9 @@ export default function NavBar(props) {
                 >
                   {route.Name}
                 </Typography>
-              )
+              );
             }
-            return true
+            return true;
           })}
           {!auth && (
             <>
@@ -185,23 +185,23 @@ export default function NavBar(props) {
                 {routes.Routes.map((route, index) => {
                   if (
                     route.Navbar &&
-                    route.Navbar === "Yes" &&
+                    route.Navbar === 'Yes' &&
                     route.Auth &&
-                    route.Auth === "Profile"
+                    route.Auth === 'Profile'
                   ) {
                     return (
                       <MenuItem
                         key={index}
                         onClick={() => {
-                          handleClose()
-                          routeChange(route.Route)
+                          handleClose();
+                          routeChange(route.Route);
                         }}
                       >
                         {route.Name}
                       </MenuItem>
-                    )
+                    );
                   }
-                  return true
+                  return true;
                 })}
               </Menu>
             </>

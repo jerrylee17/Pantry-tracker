@@ -1,22 +1,28 @@
 {
     "env": {
-        "node": true,
-        "es6": true
+        "browser": true,
+        "es6": true,
+        "node": true
     },
-    "extends": "eslint:recommended",
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
+    "parser": "babel-eslint",
+    "plugins": [
+        "react"
+    ],
     "rules": {
         "indent": [
             "error",
-            2,
-            {"SwitchCase": 1}
+            2
         ],
         "quotes": [
             "error",
@@ -26,20 +32,34 @@
             "error",
             "always"
         ],
-        "camelcase": 2,
         "max-len": [
             2,
             {
-                "code": 80
+                "code": 150
             }
         ],
         "comma-spacing": "error",
+        "no-console": [
+            "error",
+            {
+                "allow": [
+                    "debug"
+                ]
+            }
+        ],
         "no-empty": [
             "error",
             {
                 "allowEmptyCatch": true
             }
         ],
+        "no-extra-semi": "error",
+        "eol-last": 2,
+        "space-before-function-paren": ["error", {
+          "anonymous": "never",
+          "named": "never",
+          "asyncArrow": "always"
+        }],
         "no-warning-comments": [
             2,
             {
@@ -60,8 +80,9 @@
                 ]
             }
         ],
-        "no-extra-semi": "error",
         "no-var": 2,
-        "eol-last": 2
+        "no-trailing-spaces": "error",
+        "brace-style": "error",
+        "no-use-before-define": "error" 
     }
 }

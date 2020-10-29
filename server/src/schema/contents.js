@@ -1,4 +1,4 @@
-const { Contents, ContentsTC } = require('../../model/preloader');
+const { ContentsTC } = require('../../model/preloader');
 
 const ContentsQuery = {
   contentsById: ContentsTC.mongooseResolvers.findById(),

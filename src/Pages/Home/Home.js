@@ -1,8 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { 
+import {
   Paper,
-  Grid, 
+  Grid,
   Typography,
   Button
 } from '@material-ui/core';
@@ -16,13 +16,13 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center'
   },
   lightbackground: {
-    backgroundColor: "#D3D7FF"
+    backgroundColor: '#D3D7FF'
   },
   medbackground: {
-    backgroundColor: "#ACB4FF"
+    backgroundColor: '#ACB4FF'
   },
   darkbackground: {
-    backgroundColor: "#9098E0"
+    backgroundColor: '#9098E0'
   },
   lightbanner: {
     margin: '0px',
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100%'
   },
   boxes: {
-    backgroundColor: "#D3D7FF",
+    backgroundColor: '#D3D7FF',
     margin: '2vh 3vw 3vh 3vw',
     justifyContent: 'center',
     height: 'auto',
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
   introfont: {
     fontSize: '150%',
   },
-}))
+}));
 
 
 export default function Home(props) {
@@ -79,24 +79,24 @@ export default function Home(props) {
       <div>
         <Grid
           container
-          justify='center' 
+          justify='center'
           spacing={3}
           xs={12}
         >
           <Grid item xs={6}>
-            <Paper 
+            <Paper
               className={classes.paper}
               elevation={0}
             >
-              <img 
-                className={classes.mainimage} 
-                src={pantrymanagement} 
+              <img
+                className={classes.mainimage}
+                src={pantrymanagement}
                 alt="pantry management"
               />
             </Paper>
           </Grid>
           <Grid item xs={6}>
-            <Paper 
+            <Paper
               className={classes.paper}
               elevation={0}
             >
@@ -110,7 +110,7 @@ export default function Home(props) {
         <Grid
           className={classes.darkbanner}
           container
-          justify='center' 
+          justify='center'
           spacing={3}
           xs={12}
         >
@@ -120,10 +120,10 @@ export default function Home(props) {
               justifyContent='center'
               elevation={3}
             >
-              <img 
+              <img
                 className={classes.miniimage}
 
-                src={speed_left} 
+                src={speed_left}
                 alt="fast updates"
               />
               <Typography
@@ -139,9 +139,9 @@ export default function Home(props) {
               className={classes.boxes}
               elevation={3}
             >
-              <img 
-                className={classes.miniimage} 
-                src={food_mid} 
+              <img
+                className={classes.miniimage}
+                src={food_mid}
                 alt="food suggestions"
               />
               <Typography
@@ -156,23 +156,23 @@ export default function Home(props) {
               className={classes.boxes}
               elevation={3}
             >
-              <img 
-                className={classes.miniimage} 
-                src={stats_right} 
+              <img
+                className={classes.miniimage}
+                src={stats_right}
                 alt="can see pantry status"
               />
-            <Typography
-              className={classes.typography}
-            >
+              <Typography
+                className={classes.typography}
+              >
               Changes in your pantry will be reflected on the website immediately
-            </Typography>
+              </Typography>
             </Paper>
           </Grid>
         </Grid>
         <Grid
           className={classes.lightbackground}
           container
-          justify='center' 
+          justify='center'
           spacing={3}
           xs={12}
         >
@@ -185,7 +185,7 @@ export default function Home(props) {
         <Grid
           container
           className={classes.darkbanner}
-          justify='center' 
+          justify='center'
           spacing={3}
           xs={12}
         >
@@ -211,7 +211,7 @@ export default function Home(props) {
         <Grid
           classname={classes.darkbanner}
           container
-          justify='center' 
+          justify='center'
           spacing={3}
           xs={12}
         >

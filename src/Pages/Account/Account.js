@@ -1,7 +1,7 @@
 import { Button, makeStyles, Paper, TextField } from '@material-ui/core';
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks'
-import { USER_QUERY } from '../../APIFunctions/user'
+import { useQuery } from '@apollo/react-hooks';
+import { USER_QUERY } from '../../APIFunctions/user';
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     flexBasis: '100%',
     height: '2vh'
   }
-}))
+}));
 
 export default function Account(props) {
   const classes = useStyles();

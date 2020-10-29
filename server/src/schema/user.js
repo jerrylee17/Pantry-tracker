@@ -1,4 +1,4 @@
-const { User, UserTC } = require('../../model/preloader');
+const { UserTC } = require('../../model/preloader');
 
 
 const UserQuery = {

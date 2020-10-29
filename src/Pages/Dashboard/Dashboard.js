@@ -1,6 +1,6 @@
 import { makeStyles, Paper } from '@material-ui/core';
 import React from 'react';
-import VerticalTabs from './tabPanel'
+import VerticalTabs from './tabPanel';
 import { useQuery } from '@apollo/react-hooks';
 import { USER_QUERY } from '../../APIFunctions/user.js';
 
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     fontFamily: theme.typography.fontFamily
   }
-}))
+}));
 
 
 export default function Dashboard(props) {

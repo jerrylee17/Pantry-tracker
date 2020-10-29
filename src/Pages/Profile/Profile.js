@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import {
   Avatar,
@@ -7,7 +7,7 @@ import {
   Paper,
 } from '@material-ui/core';
 import { deepPurple } from '@material-ui/core/colors';
-import PantryCard from './PantryCard'
+import PantryCard from './PantryCard';
 import { useQuery } from '@apollo/react-hooks';
 import { USER_QUERY } from '../../APIFunctions/user.js';
 
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '7vh',
     flexGrow: 1,
   },
-}))
+}));
 
 
 export default function Profile(props) {

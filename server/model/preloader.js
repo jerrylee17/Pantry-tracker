@@ -18,8 +18,8 @@ const { PantryContents, PantryContentsTC } = require('./pantryContents');
 //     }
 //
 // this is a problem because we're using graphql, we can't use the .populate()
-// function that monggoose supports for this problem that we might if we were 
-// using a REST API setup so we need to load the data and then populate it with 
+// function that monggoose supports for this problem that we might if we were
+// using a REST API setup so we need to load the data and then populate it with
 // the id's as done below
 
 UserPantriesTC.addRelation(

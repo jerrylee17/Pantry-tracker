@@ -29,7 +29,7 @@ function App() {
   );
 }
 
-// we render our application after wrapping it with apollo 
+// we render our application after wrapping it with apollo
 ReactDOM.render(
   <ApolloProvider client={client}>
     <App />
