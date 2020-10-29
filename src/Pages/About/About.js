@@ -48,6 +48,7 @@ export default function About(props) {
       <div className={classes.memberPaper}>
         {aboutData.members.map((member, index) => (
           <Paper elevation={3}>
+
             <img
               src={images[member.picture]}
               alt={member.name}

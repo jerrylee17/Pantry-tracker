@@ -15,7 +15,7 @@
     "clsx": "^1.1.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "eslint": "6.6.0",
+    "eslint": "^6.6.0",
     "express": "^4.17.1",
     "graphql": "^15.3.0",
     "graphql-compose": "^7.21.5",
@@ -39,7 +39,8 @@
     "eject": "react-scripts eject",
     "server": "nodemon ./server/server.js",
     "server-build": "babel ./server/ -d dist/",
-    "test-server": "node dist/server.js"
+    "test-server": "node dist/server.js",
+    "lint": "./node_modules/.bin/eslint ./"
   },
   "eslintConfig": {
     "extends": "react-app"
