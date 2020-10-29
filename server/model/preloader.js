@@ -1,5 +1,5 @@
 const { Contents, ContentsTC } = require('./contents');
-const { Pantry, PantryTC } = require('./pantry')
+const { Pantry, PantryTC } = require('./pantry');
 const { User, UserTC } = require('./user');
 const { UserPantries, UserPantriesTC } = require('./userPantries');
 const { PantryContents, PantryContentsTC } = require('./pantryContents');

@@ -15,14 +15,14 @@ const PantrySchema = new mongoose.Schema(
 );
 
 PantrySchema.plugin(timestamps);
-PantrySchema.index({ createdAt: 1, updatedAt: 1 })
+PantrySchema.index({ createdAt: 1, updatedAt: 1 });
 
 
 const Pantry = mongoose.model('Pantry', PantrySchema);
 const PantryTC = composeMongoose(Pantry);
 
 module.exports = {
-    PantrySchema,
-    Pantry,
-    PantryTC
+  PantrySchema,
+  Pantry,
+  PantryTC
 };

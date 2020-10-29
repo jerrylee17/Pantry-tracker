@@ -26,5 +26,5 @@ schemaComposer.Mutation.addFields({
 const schema = schemaComposer.buildSchema();
 
 module.exports = {
-    schema
+  schema
 };

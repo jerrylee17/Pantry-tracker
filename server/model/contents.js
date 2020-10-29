@@ -13,19 +13,19 @@ const ContentsSchema = new mongoose.Schema(
             min: 0,
         },
     },
-    {
-        collection: 'Contents'
-    }
+  {
+    collection: 'Contents'
+  }
 );
 
 ContentsSchema.plugin(timestamps);
-ContentsSchema.index({ createdAt: 1, updatedAt: 1 })
+ContentsSchema.index({ createdAt: 1, updatedAt: 1 });
 
 const Contents = mongoose.model('Contents', ContentsSchema);
 const ContentsTC = composeMongoose(Contents);
 
 module.exports = {
-    ContentsSchema,
-    Contents,
-    ContentsTC
+  ContentsSchema,
+  Contents,
+  ContentsTC
 };

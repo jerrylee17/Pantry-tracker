@@ -8,9 +8,9 @@ require('./database.js');
 
 // const { schema } = compose.schema;
 const server = new ApolloServer({ 
-    schema,
-    playground: true,
-    introspection: true,
+  schema,
+  playground: true,
+  introspection: true,
 
 });
 // context: ({ req }) => {
@@ -36,5 +36,5 @@ app.use(cors());
 server.applyMiddleware({ app });
 
 app.listen({ port:4000 }, () =>
-    console.log(`Server ready at http://localhost:4000${server.graphqlPath}`)
+  console.log(`Server ready at http://localhost:4000${server.graphqlPath}`)
 );
