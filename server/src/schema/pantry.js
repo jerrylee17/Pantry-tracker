@@ -1,4 +1,4 @@
-const { Pantry, PantryTC } = require('../../model/pantry');
+const { Pantry, PantryTC } = require('../../model/preloader');
 
 const PantryQuery = {
     pantryById: PantryTC.mongooseResolvers.findById(),

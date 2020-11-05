@@ -1,6 +1,9 @@
 const { Contents, ContentsTC } = require('./contents');
 const { Pantry, PantryTC } = require('./pantry')
 const { User, UserTC } = require('./user');
+const { UserPantries, UserPantriesTC } = require('./userPantries');
+const { PantryContents, PantryContentsTC } = require('./pantryContents');
+
 
 // our current mongoose schema saves the relations (1-1, 1-N, M-N) between
 // different entities by saving their object id so we can reference them later
@@ -19,7 +22,18 @@ const { User, UserTC } = require('./user');
 // using a REST API setup so we need to load the data and then populate it with 
 // the id's as done below
 
-UserTC.addRelation(
+UserPantriesTC.addRelation(
+    'owners',
+    {
+        resolver: () => UserTC.mongooseResolvers.dataLoaderMany(),
+        prepareArgs: {
+            _ids: source => source.owners || [],
+        },
+        projection: { owners: true }
+    }
+);
+
+UserPantriesTC.addRelation(
     'pantries',
     {
         resolver: () => PantryTC.mongooseResolvers.dataLoaderMany(),
@@ -30,7 +44,7 @@ UserTC.addRelation(
     }
 );
 
-ContentsTC.addRelation(
+PantryContentsTC.addRelation(
     'pantry',
     {
         resolver: () => PantryTC.mongooseResolvers.dataLoader(),
@@ -41,27 +55,18 @@ ContentsTC.addRelation(
     }
 );
 
-PantryTC.addRelation(
-    'owner',
-    {
-        resolver: () => UserTC.mongooseResolvers.dataLoaderMany(),
-        prepareArgs: {
-            _ids: source => source.owner || [],
-        },
-        projection: { owner: true }
-    }
-);
-
-PantryTC.addRelation(
+PantryContentsTC.addRelation(
     'contents',
     {
         resolver: () => ContentsTC.mongooseResolvers.dataLoaderMany(),
         prepareArgs: {
-            _ids: source => source.contents || [],
+            _id: (source) => source.contents || "",
         },
         projection: { contents: true }
     }
 );
+
+
 
 module.exports = {
     User,
@@ -70,4 +75,8 @@ module.exports = {
     PantryTC,
     Contents,
     ContentsTC,
+    UserPantries,
+    UserPantriesTC,
+    PantryContents,
+    PantryContentsTC,
 };
