@@ -1,24 +1,24 @@
 const { UserPantries, UserPantriesTC } = require('../../model/preloader');
 
 const UserPantriesQuery = {
-    UserPantriesById: UserPantriesTC.mongooseResolvers.findById(),
-    UserPantriesByIds: UserPantriesTC.mongooseResolvers.findByIds(),
-    UserPantriesOne: UserPantriesTC.mongooseResolvers.findOne(),
-    UserPantriesMany: UserPantriesTC.mongooseResolvers.findMany(),
-    UserPantriesCount: UserPantriesTC.mongooseResolvers.count(),
-    UserPantriesConnection: UserPantriesTC.mongooseResolvers.connection(),
-    UserPantriesPagination: UserPantriesTC.mongooseResolvers.pagination(),
+    userPantriesById: UserPantriesTC.mongooseResolvers.findById(),
+    userPantriesByIds: UserPantriesTC.mongooseResolvers.findByIds(),
+    userPantriesOne: UserPantriesTC.mongooseResolvers.findOne(),
+    userPantriesMany: UserPantriesTC.mongooseResolvers.findMany(),
+    userPantriesCount: UserPantriesTC.mongooseResolvers.count(),
+    userPantriesConnection: UserPantriesTC.mongooseResolvers.connection(),
+    userPantriesPagination: UserPantriesTC.mongooseResolvers.pagination(),
 };
 
 const UserPantriesMutation = {
-    UserPantriesCreateOne: UserPantriesTC.mongooseResolvers.createOne(),
-    UserPantriesCreateMany: UserPantriesTC.mongooseResolvers.createMany(),
-    UserPantriesUpdateById: UserPantriesTC.mongooseResolvers.updateById(),
-    UserPantriesUpdateOne: UserPantriesTC.mongooseResolvers.updateOne(),
-    UserPantriesUpdateMany: UserPantriesTC.mongooseResolvers.updateMany(),
-    UserPantriesRemoveById: UserPantriesTC.mongooseResolvers.removeById(),
-    UserPantriesRemoveOne: UserPantriesTC.mongooseResolvers.removeOne(),
-    UserPantriesRemoveMany: UserPantriesTC.mongooseResolvers.removeMany(),
+    userPantriesCreateOne: UserPantriesTC.mongooseResolvers.createOne(),
+    userPantriesCreateMany: UserPantriesTC.mongooseResolvers.createMany(),
+    userPantriesUpdateById: UserPantriesTC.mongooseResolvers.updateById(),
+    userPantriesUpdateOne: UserPantriesTC.mongooseResolvers.updateOne(),
+    userPantriesUpdateMany: UserPantriesTC.mongooseResolvers.updateMany(),
+    userPantriesRemoveById: UserPantriesTC.mongooseResolvers.removeById(),
+    userPantriesRemoveOne: UserPantriesTC.mongooseResolvers.removeOne(),
+    userPantriesRemoveMany: UserPantriesTC.mongooseResolvers.removeMany(),
 };
 
 module.exports = {

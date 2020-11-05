@@ -1,24 +1,24 @@
 const { PantryContents, PantryContentsTC } = require('../../model/preloader');
 
 const PantryContentsQuery = {
-    PantryContentsById: PantryContentsTC.mongooseResolvers.findById(),
-    PantryContentsByIds: PantryContentsTC.mongooseResolvers.findByIds(),
-    PantryContentsOne: PantryContentsTC.mongooseResolvers.findOne(),
-    PantryContentsMany: PantryContentsTC.mongooseResolvers.findMany(),
-    PantryContentsCount: PantryContentsTC.mongooseResolvers.count(),
-    PantryContentsConnection: PantryContentsTC.mongooseResolvers.connection(),
-    PantryContentsPagination: PantryContentsTC.mongooseResolvers.pagination(),
+    pantryContentsById: PantryContentsTC.mongooseResolvers.findById(),
+    pantryContentsByIds: PantryContentsTC.mongooseResolvers.findByIds(),
+    pantryContentsOne: PantryContentsTC.mongooseResolvers.findOne(),
+    pantryContentsMany: PantryContentsTC.mongooseResolvers.findMany(),
+    pantryContentsCount: PantryContentsTC.mongooseResolvers.count(),
+    pantryContentsConnection: PantryContentsTC.mongooseResolvers.connection(),
+    pantryContentsPagination: PantryContentsTC.mongooseResolvers.pagination(),
 };
 
 const PantryContentsMutation = {
-    PantryContentsCreateOne: PantryContentsTC.mongooseResolvers.createOne(),
-    PantryContentsCreateMany: PantryContentsTC.mongooseResolvers.createMany(),
-    PantryContentsUpdateById: PantryContentsTC.mongooseResolvers.updateById(),
-    PantryContentsUpdateOne: PantryContentsTC.mongooseResolvers.updateOne(),
-    PantryContentsUpdateMany: PantryContentsTC.mongooseResolvers.updateMany(),
-    PantryContentsRemoveById: PantryContentsTC.mongooseResolvers.removeById(),
-    PantryContentsRemoveOne: PantryContentsTC.mongooseResolvers.removeOne(),
-    PantryContentsRemoveMany: PantryContentsTC.mongooseResolvers.removeMany(),
+    pantryContentsCreateOne: PantryContentsTC.mongooseResolvers.createOne(),
+    pantryContentsCreateMany: PantryContentsTC.mongooseResolvers.createMany(),
+    pantryContentsUpdateById: PantryContentsTC.mongooseResolvers.updateById(),
+    pantryContentsUpdateOne: PantryContentsTC.mongooseResolvers.updateOne(),
+    pantryContentsUpdateMany: PantryContentsTC.mongooseResolvers.updateMany(),
+    pantryContentsRemoveById: PantryContentsTC.mongooseResolvers.removeById(),
+    pantryContentsRemoveOne: PantryContentsTC.mongooseResolvers.removeOne(),
+    pantryContentsRemoveMany: PantryContentsTC.mongooseResolvers.removeMany(),
 };
 
 module.exports = {
