@@ -432,7 +432,11 @@ export default function Home(props) {
             >
               What's in your pantry was created by seniors at San Jose State University
             </Typography>
-            <Button>Learn More</Button>
+            <Button
+              href="/about"
+            >
+              Learn More
+            </Button>
           </Paper>
           <Paper
             className={`${classes.lightbackground} ${classes.typography}`}
@@ -442,7 +446,11 @@ export default function Home(props) {
             >
               The application and all of the code needed to run it can be found on github
             </Typography>
-            <Button>Learn More</Button>
+            <Button
+              href="https://github.com/jerrylee17/Pantry-tracker"
+            >
+              Learn More
+            </Button>
           </Paper>
         </Grid>
         <Grid
