@@ -144,14 +144,22 @@ const useStyles = makeStyles((theme) => ({
     width: '35em',
   },
   mapHiddenBox: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       maxHeight: '0px',
       maxWidth: '0px',
     },
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       padding: '4px',
       textAlign: 'center',
+      // height: '20vh',
     }
+  },
+  listText: {
+    textAlign: 'left',
+  },
+  bigBox: {
+    height: '500px',
+    width: '250px',
   },
   map: {
     width: '90vw',
@@ -344,7 +352,7 @@ export default function Home(props) {
               How it comes together
             </Typography>
             <div className={classes.break}/>
-            <Hidden smDown>
+            <Hidden mdDown>
               <div
                 className={`${classes.mapHiddenBox}`}
               >
@@ -355,29 +363,49 @@ export default function Home(props) {
                 />
               </div>
             </Hidden>
-            <Hidden smUp>
-              <div
-                className={classes.mapHiddenBox}
+            <Hidden lgUp>
+              {/* <Typography
+                className={`${classes.typography} ${classes.subtitleText}`}
+                inline
               >
-                <Typography
-                  className={`${classes.typography} ${classes.subtitleText}`}
-                  inline
-                >
-                  <em>MANAGEMENT AND MONITORING TOOLS FOR YOUR Pantry</em>
-                </Typography>
-                <Typography
-                  className={`${classes.typography} ${classes.headerText}`}
-                  inline
-                >
-                  Tracking the items in your pantry has never been easier
-                </Typography>
-                <Typography
-                  className={`${classes.typography} ${classes.definitionText}`}
-                  inline
-                >
-                  Our Pantry tracking solution empowers users with one to several pantries to manage and view their pantries in real time.
-                </Typography>
-              </div>
+                <em>MANAGEMENT AND MONITORING TOOLS FOR YOUR Pantry</em>
+              </Typography> */}
+              {/* <Typography
+                className={`${classes.typography} ${classes.headerText}`}
+                inline
+              >
+                Tracking the items in your pantry has never been easier
+              </Typography> */}
+              <Typography
+                className={`${classes.typography} ${classes.definitionText} ${classes.listText}`}
+                inline
+              >
+                1. A user purchases a Raspberry Pi with a camera from us and installs it onto their pantry.
+              </Typography>
+              <Typography
+                className={`${classes.typography} ${classes.definitionText} ${classes.listText}`}
+                inline
+              >
+                2. The Pi controls the camera to take pictures of the pantry and then transmits it to our AWS server
+              </Typography>
+              <Typography
+                className={`${classes.typography} ${classes.definitionText} ${classes.listText}`}
+                inline
+              >
+                3. The AWS server batches the images and processes the data through a neural network
+              </Typography>
+              <Typography
+                className={`${classes.typography} ${classes.definitionText} ${classes.listText}`}
+                inline
+              >
+                4. After determining the food contents, the AWS server then updates the website server for that users account
+              </Typography>
+              <Typography
+                className={`${classes.typography} ${classes.definitionText} ${classes.listText}`}
+                inline
+              >
+                5. When the user next accesses the website, their pantry contents will be rendered for them to see
+              </Typography>
             </Hidden>
           </div>
         </Grid>
