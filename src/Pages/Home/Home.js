@@ -12,6 +12,7 @@ import map from './images/map.svg';
 import pantrymanagement from './images/pantrymanagement.svg';
 import speed_left from './images/speed_left.svg';
 import stats_right from './images/stats_right.svg';
+const routes = require('../../Routes.json');
 const useStyles = makeStyles((theme) => ({
   header: {
     textAlign: 'center'
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: theme.typography.fontFamily
   },
   mainimage: {
-    paddingLeft: "20%",
+    paddingLeft: '20%',
     minHeight: '40vh',
     minWidth: '30vw',
     width: '70%',
@@ -84,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
   },
   rightImage: {
     paddingLeft: '30%',
-    paddingTop: "4%",
+    paddingTop: '4%',
     width: '47%',
     height: '47%',
   },
@@ -96,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   mainText: {
-    paddingRight: "25%"
+    paddingRight: '25%'
   },
   typography: {
     padding: '4px',
@@ -217,7 +218,7 @@ export default function Home(props) {
               <img
                 className={classes.mainimage}
                 src={pantrymanagement}
-                alt="pantry management"
+                alt='pantry management'
               />
             </Paper>
           </Grid>
@@ -244,21 +245,21 @@ export default function Home(props) {
           <div
             className={classes.boxesRow}
           >
-            <Grid 
-              item 
+            <Grid
+              item
               xs={4}
               justifyContent='center'
-              >
+            >
               <Paper
                 className={classes.boxes}
                 justifyContent='center'
                 elevation={3}
                 spacing={3}
               >
-                <img   
+                <img
                   className={`${classes.miniImagePepTalk} ${classes.leftImage}`}
                   src={speed_left}
-                  alt="fast updates"
+                  alt='fast updates'
                 />
                 <Typography
                   className={classes.typography}
@@ -267,8 +268,8 @@ export default function Home(props) {
                 </Typography>
               </Paper>
             </Grid>
-            <Grid 
-              item 
+            <Grid
+              item
               xs={4}
             >
               <Paper
@@ -278,7 +279,7 @@ export default function Home(props) {
                 <img
                   className={`${classes.miniImagePepTalk} ${classes.midImage}`}
                   src={food_mid}
-                  alt="food suggestions"
+                  alt='food suggestions'
                 />
                 <Typography
                   className={classes.typography}
@@ -287,8 +288,8 @@ export default function Home(props) {
                 </Typography>
               </Paper>
             </Grid>
-            <Grid 
-              item 
+            <Grid
+              item
               xs={4}
             >
               <Paper
@@ -298,7 +299,7 @@ export default function Home(props) {
                 <img
                   className={`${classes.miniImagePepTalk} ${classes.rightImage}`}
                   src={stats_right}
-                  alt="can see pantry status"
+                  alt='can see pantry status'
                 />
                 <Typography
                   className={classes.typography}
@@ -316,24 +317,24 @@ export default function Home(props) {
           spacing={3}
           xs={12}
         >
-            <Typography
-              className={`${classes.typography} ${classes.subtitleText}`}
-              inline
-            >
-              <em>MANAGEMENT AND MONITORING TOOLS FOR YOUR Pantry</em>
-            </Typography>
-            <Typography
-              className={`${classes.typography} ${classes.headerText}`}
-              inline
-            >
+          <Typography
+            className={`${classes.typography} ${classes.subtitleText}`}
+            inline
+          >
+            <em>MANAGEMENT AND MONITORING TOOLS FOR YOUR Pantry</em>
+          </Typography>
+          <Typography
+            className={`${classes.typography} ${classes.headerText}`}
+            inline
+          >
               Tracking the items in your pantry has never been easier
-            </Typography>
-            <Typography
-              className={`${classes.typography} ${classes.definitionText}`}
-              inline
-            >
+          </Typography>
+          <Typography
+            className={`${classes.typography} ${classes.definitionText}`}
+            inline
+          >
               Our Pantry tracking solution empowers users with one to several pantries to manage and view their pantries in real time.
-            </Typography>
+          </Typography>
         </Grid>
         <Grid
           container
@@ -359,23 +360,11 @@ export default function Home(props) {
                 <img
                   className={classes.map}
                   src={map}
-                  alt="map"
+                  alt='map'
                 />
               </div>
             </Hidden>
             <Hidden lgUp>
-              {/* <Typography
-                className={`${classes.typography} ${classes.subtitleText}`}
-                inline
-              >
-                <em>MANAGEMENT AND MONITORING TOOLS FOR YOUR Pantry</em>
-              </Typography> */}
-              {/* <Typography
-                className={`${classes.typography} ${classes.headerText}`}
-                inline
-              >
-                Tracking the items in your pantry has never been easier
-              </Typography> */}
               <Typography
                 className={`${classes.typography} ${classes.definitionText} ${classes.listText}`}
                 inline
@@ -437,7 +426,6 @@ export default function Home(props) {
           </Grid>
           <Paper
             className={`${classes.lightbackground} ${classes.typography}`}
-            // elevation={1}
           >
             <Typography
               className={classes.aboutUsText}
@@ -448,7 +436,6 @@ export default function Home(props) {
           </Paper>
           <Paper
             className={`${classes.lightbackground} ${classes.typography}`}
-            // elevation={1}
           >
             <Typography
               className={classes.aboutUsText}
