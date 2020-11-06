@@ -3,16 +3,16 @@ const timestamps = require('mongoose-timestamp');
 const { composeMongoose } = require('graphql-compose-mongoose');
 
 const ContentsSchema = new mongoose.Schema(
-    {
-        name: {
-            type: String,
-            required: true,
-        },
-        count: {
-            type: Number,
-            min: 0,
-        },
+  {
+    name: {
+      type: String,
+      required: true,
     },
+    count: {
+      type: Number,
+      min: 0,
+    },
+  },
   {
     collection: 'Contents'
   }
