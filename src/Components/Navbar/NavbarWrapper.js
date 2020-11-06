@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from './NavBar'
+import NavBar from './NavBar';
 
 export default function NavBarWrapper({
   component: Component,
@@ -10,5 +10,5 @@ export default function NavBarWrapper({
       <NavBar />
       <Component {...props} />
     </>
-  )
+  );
 }

@@ -1,6 +1,6 @@
-import React from 'react'
-import { Fade, makeStyles, TextField, Button } from '@material-ui/core'
-import Modal from '@material-ui/core/Modal'
+import React from 'react';
+import { Fade, makeStyles, TextField, Button } from '@material-ui/core';
+import Modal from '@material-ui/core/Modal';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -29,13 +29,13 @@ const useStyles = makeStyles((theme) => ({
   registerButton: {
     float: 'right'
   }
-}))
+}));
 
 export default function LoginModal(props) {
   const {
     open,
     onClose
-  } = props
+  } = props;
   const classes = useStyles();
   return (
     <>
@@ -82,5 +82,5 @@ export default function LoginModal(props) {
         </Fade>
       </Modal>
     </>
-  )
+  );
 }

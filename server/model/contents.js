@@ -3,29 +3,29 @@ const timestamps = require('mongoose-timestamp');
 const { composeMongoose } = require('graphql-compose-mongoose');
 
 const ContentsSchema = new mongoose.Schema(
-    {
-        name: {
-            type: String,
-            required: true,
-        },
-        count: {
-            type: Number,
-            min: 0,
-        },
+  {
+    name: {
+      type: String,
+      required: true,
     },
-    {
-        collection: 'Contents'
-    }
+    count: {
+      type: Number,
+      min: 0,
+    },
+  },
+  {
+    collection: 'Contents'
+  }
 );
 
 ContentsSchema.plugin(timestamps);
-ContentsSchema.index({ createdAt: 1, updatedAt: 1 })
+ContentsSchema.index({ createdAt: 1, updatedAt: 1 });
 
 const Contents = mongoose.model('Contents', ContentsSchema);
 const ContentsTC = composeMongoose(Contents);
 
 module.exports = {
-    ContentsSchema,
-    Contents,
-    ContentsTC
+  ContentsSchema,
+  Contents,
+  ContentsTC
 };

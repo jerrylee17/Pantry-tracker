@@ -8,23 +8,23 @@ const { PantryContentsQuery, PantryContentsMutation } = require('./pantryContent
 
 
 schemaComposer.Query.addFields({
-    ...UserQuery,
-    ...PantryQuery,
-    ...ContentsQuery,
-    ...UserPantriesQuery,
-    ...PantryContentsQuery,
+  ...UserQuery,
+  ...PantryQuery,
+  ...ContentsQuery,
+  ...UserPantriesQuery,
+  ...PantryContentsQuery,
 });
 
 schemaComposer.Mutation.addFields({
-    ...UserMutation,
-    ...PantryMutation,
-    ...ContentsMutation,
-    ...UserPantriesMutation,
-    ...PantryContentsMutation,
+  ...UserMutation,
+  ...PantryMutation,
+  ...ContentsMutation,
+  ...UserPantriesMutation,
+  ...PantryContentsMutation,
 });
 
 const schema = schemaComposer.buildSchema();
 
 module.exports = {
-    schema
+  schema
 };

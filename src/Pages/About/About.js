@@ -12,8 +12,8 @@ function importAll(r) {
   });
   return images;
 }
-var images = importAll(require.context('./images', true, /\.(png|jpe?g|svg)$/));
-console.log(images);
+let images = importAll(require.context('./images', true, /\.(png|jpe?g|svg)$/));
+// console.log(images);
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -21,7 +21,11 @@ const useStyles = makeStyles((theme) => ({
   },
   description: {
     margin: theme.spacing(4),
-    textAlign: 'center'
+    textAlign: 'center',
+    marginLeft: theme.spacing(10),
+    marginRight: theme.spacing(10),
+    textAlign: 'left',
+    lineHeight: 1.7
   },
   memberPaper: {
     display: 'grid',
@@ -35,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
       textAlign: 'center',
     },
   },
-}))
+}));
 
 export default function About(props) {
   const classes = useStyles();
@@ -48,6 +52,7 @@ export default function About(props) {
       <div className={classes.memberPaper}>
         {aboutData.members.map((member, index) => (
           <Paper elevation={3}>
+
             <img
               src={images[member.picture]}
               alt={member.name}

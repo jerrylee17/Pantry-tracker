@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles'
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import {
   Avatar,
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   delete: {
     color: red[800]
   },
-}))
+}));
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -74,7 +74,7 @@ export default function PantryCard(props) {
     contents
   } = props;
   const [settings, setSettings] = useState(null);
-  const settingOpen = Boolean(settings)
+  const settingOpen = Boolean(settings);
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
 
@@ -122,13 +122,13 @@ export default function PantryCard(props) {
               <MenuItem
                 className={classes.delete}
                 onClick={() => {
-                  closeSettings()
+                  closeSettings();
                   // Remove pantry from database
                   // Might want to pop up a modal
                 }}
               >
                 Delete
-                </MenuItem>
+              </MenuItem>
             </Menu>
           </>
         }
@@ -172,5 +172,5 @@ export default function PantryCard(props) {
         </CardContent>
       </Collapse>
     </Card>
-  )
+  );
 }
