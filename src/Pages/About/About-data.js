@@ -21,7 +21,19 @@ export const aboutData = {
             picture: 'habib.jpeg',
         },
     ],
-    projectDescription: 'This is a description about the project',
+    projectDescription: `
+    This project consists of a model which will use machine learning to identify different
+    types of snacks as well as common pantry items. The idea is to create a program that
+    monitors and reports all items in a users pantry and will offer smart recommendations, 
+    i.e.: if you are running low on certain items or if there are healthier alternatives
+    to items in your pantry. The user can then manage pantry information, see what’s
+    currently in their pantry, and also visualize information about their pantry via
+    lists or graphs. This project consists of a model which will be trained using machine
+    learning to identify different types of snacks and common pantry items. A Raspberry Pi
+    that is connected to a camera will be utilized in conjunction with a neural network to
+    identify items in the users pantry. The items that are detected by the camera will then
+    update the users account on a webpage automatically on an event triggered basis.
+    `,
 }
 
 

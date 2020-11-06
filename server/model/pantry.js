@@ -3,15 +3,15 @@ const timestamps = require('mongoose-timestamp');
 const { composeMongoose } = require('graphql-compose-mongoose');
 
 const PantrySchema = new mongoose.Schema(
-    {
-        name: {
-            type: String,
-            required: true,
-        },
+  {
+    name: {
+      type: String,
+      required: true,
     },
-    {
-        collection: 'Pantries'
-    }
+  },
+  {
+    collection: 'Pantries'
+  }
 );
 
 PantrySchema.plugin(timestamps);
@@ -22,7 +22,7 @@ const Pantry = mongoose.model('Pantry', PantrySchema);
 const PantryTC = composeMongoose(Pantry);
 
 module.exports = {
-    PantrySchema,
-    Pantry,
-    PantryTC
+  PantrySchema,
+  Pantry,
+  PantryTC
 };

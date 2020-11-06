@@ -21,7 +21,10 @@ const useStyles = makeStyles((theme) => ({
   },
   description: {
     margin: theme.spacing(4),
-    textAlign: 'center'
+    marginLeft: theme.spacing(10),
+    marginRight: theme.spacing(10),
+    textAlign: 'left',
+    lineHeight: 1.7
   },
   memberPaper: {
     display: 'grid',
