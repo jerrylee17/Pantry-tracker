@@ -23,13 +23,13 @@ const { PantryContents, PantryContentsTC } = require('./pantryContents');
 // the id's as done below
 
 UserPantriesTC.addRelation(
-  'owners',
+  'owner',
   {
-    resolver: () => UserTC.mongooseResolvers.dataLoaderMany(),
+    resolver: () => UserTC.mongooseResolvers.dataLoader(),
     prepareArgs: {
-      _ids: source => source.owners || [],
+      _id: source => source.owner || '',
     },
-    projection: { owners: true }
+    projection: { owner: true }
   }
 );
 
@@ -60,7 +60,7 @@ PantryContentsTC.addRelation(
   {
     resolver: () => ContentsTC.mongooseResolvers.dataLoaderMany(),
     prepareArgs: {
-      _id: (source) => source.contents || '',
+      _ids: (source) => source.contents || [],
     },
     projection: { contents: true }
   }

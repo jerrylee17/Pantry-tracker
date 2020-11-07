@@ -1,4 +1,4 @@
-const  { schemaComposer } = require('graphql-compose');
+const { schemaComposer } = require('graphql-compose');
 
 const { UserQuery, UserMutation } = require('./user.js');
 const { PantryQuery, PantryMutation } = require('./pantry.js');

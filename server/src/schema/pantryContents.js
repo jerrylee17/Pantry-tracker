@@ -1,24 +1,67 @@
+const { Contents } = require('../../model/contents');
 const { PantryContents, PantryContentsTC } = require('../../model/preloader');
 
+
 const PantryContentsQuery = {
-  pantryContentsById: PantryContentsTC.mongooseResolvers.findById(),
-  pantryContentsByIds: PantryContentsTC.mongooseResolvers.findByIds(),
   pantryContentsOne: PantryContentsTC.mongooseResolvers.findOne(),
   pantryContentsMany: PantryContentsTC.mongooseResolvers.findMany(),
   pantryContentsCount: PantryContentsTC.mongooseResolvers.count(),
-  pantryContentsConnection: PantryContentsTC.mongooseResolvers.connection(),
-  pantryContentsPagination: PantryContentsTC.mongooseResolvers.pagination(),
 };
 
 const PantryContentsMutation = {
   pantryContentsCreateOne: PantryContentsTC.mongooseResolvers.createOne(),
-  pantryContentsCreateMany: PantryContentsTC.mongooseResolvers.createMany(),
-  pantryContentsUpdateById: PantryContentsTC.mongooseResolvers.updateById(),
   pantryContentsUpdateOne: PantryContentsTC.mongooseResolvers.updateOne(),
   pantryContentsUpdateMany: PantryContentsTC.mongooseResolvers.updateMany(),
-  pantryContentsRemoveById: PantryContentsTC.mongooseResolvers.removeById(),
   pantryContentsRemoveOne: PantryContentsTC.mongooseResolvers.removeOne(),
-  pantryContentsRemoveMany: PantryContentsTC.mongooseResolvers.removeMany(),
+  pantryRefresh: {
+    type: PantryContentsTC,
+    args: {
+      pantryID: 'MongoID!',
+      contentNames: '[String!]',
+      contentAmounts: '[Int!]'
+    },
+    resolve: async (source, args) => {
+      const {
+        pantryID,
+        contentNames,
+        contentAmounts
+      } = args;
+      let contentsToPush = []
+      // Must be same length
+      if (contentNames.length != contentAmounts.length) return null
+      // Data processing
+      for (let i = 0; i < contentNames.length; i++) {
+        contentsToPush.push({
+          pantry: pantryID,
+          name: contentNames[i],
+          count: contentAmounts[i]
+        });
+      }
+      // Wipe items that are currently connected with pantry
+      await Contents.deleteMany(
+        { pantry: pantryID }
+      );
+      await PantryContents.deleteOne(
+        { pantry: pantryID }
+      )
+
+      // Put new contents into database
+      const contents = await Contents.insertMany(
+        contentsToPush,
+        {
+          upsert: true
+        }
+      );
+      const pantryContents = await PantryContents.create(
+        {
+          pantry: pantryID,
+          contents: contents.map((item) => (item._id))
+        }
+      )
+      // console.log(pantryContents)
+      return pantryContents
+    }
+  }
 };
 
 module.exports = {
