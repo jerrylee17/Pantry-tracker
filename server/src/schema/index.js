@@ -6,6 +6,12 @@ const { ContentsQuery, ContentsMutation } = require('./contents.js');
 const { UserPantriesQuery, UserPantriesMutation } = require('./userPantries.js');
 const { PantryContentsQuery, PantryContentsMutation } = require('./pantryContents.js');
 
+schemaComposer.addTypeDefs(`
+type AuthData {
+  userID: ID!
+  token: String!
+  tokenExpiration: Int!
+}`);
 
 schemaComposer.Query.addFields({
   ...UserQuery,
@@ -24,6 +30,11 @@ schemaComposer.Mutation.addFields({
 });
 
 const schema = schemaComposer.buildSchema();
+//   `type AuthData {
+//   userID: ID!
+//   token: String!
+//   tokenExpiration: Int!
+// }`);
 
 module.exports = {
   schema

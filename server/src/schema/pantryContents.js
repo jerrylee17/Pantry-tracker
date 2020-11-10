@@ -17,8 +17,8 @@ const PantryContentsMutation = {
     type: PantryContentsTC,
     args: {
       pantryID: 'MongoID!',
-      contentNames: '[String!]',
-      contentAmounts: '[Int!]'
+      contentNames: '[String]',
+      contentAmounts: '[Int]'
     },
     resolve: async (source, args) => {
       const {
@@ -58,7 +58,6 @@ const PantryContentsMutation = {
           contents: contents.map((item) => (item._id))
         }
       )
-      // console.log(pantryContents)
       return pantryContents
     }
   }

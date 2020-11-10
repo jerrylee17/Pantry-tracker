@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavBar(props) {
   const classes = useStyles();
-  const auth = true;
+  const auth = false;
   const [anchorEl, setAnchorEl] = useState(null);
   const [modal, setModal] = useState(false);
   const profileOpen = Boolean(anchorEl);

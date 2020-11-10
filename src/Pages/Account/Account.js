@@ -1,7 +1,7 @@
 import { Button, makeStyles, Paper, TextField } from '@material-ui/core';
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { USER_QUERY } from '../../APIFunctions/user';
+import { USER_QUERY } from '../../APIFunctions/queries';
 
 const useStyles = makeStyles((theme) => ({
   header: {
