@@ -23,11 +23,11 @@ const UserPantriesMutation = {
       const {
         username,
         pantryName
-      } = args
+      } = args;
       // Create pantry
       const pantry = await Pantry.create({
         name: pantryName
-      })
+      });
       // if error
       if (!pantry) return null;
 
@@ -45,8 +45,7 @@ const UserPantriesMutation = {
           upsert: true,
           useFindAndModify: false,
         },
-      )
-      console.log(userPantryEntry)
+      );
       return userPantryEntry;
     }
   },
@@ -60,11 +59,11 @@ const UserPantriesMutation = {
       const {
         username,
         pantryID
-      } = args
+      } = args;
       // Create pantry
       const pantry = await Pantry.findOne({
         _id: pantryID
-      })
+      });
       // if error
       if (!pantry) return null;
 
@@ -82,8 +81,7 @@ const UserPantriesMutation = {
           upsert: true,
           useFindAndModify: false,
         },
-      )
-      console.log(userPantryEntry)
+      );
       return userPantryEntry;
     }
   },
@@ -112,9 +110,9 @@ const UserPantriesMutation = {
           new: true,
           useFindAndModify: false,
         },
-      )
+      );
       if (!userPantryEntry) return null;
-      return userPantryEntry
+      return userPantryEntry;
     }
   }
 };

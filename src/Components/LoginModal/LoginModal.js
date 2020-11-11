@@ -44,11 +44,9 @@ export default function LoginModal(props) {
     const data = { username, password };
     const loginStatus = await login(data);
     if (!loginStatus.error) {
-      props.setAuthenticated(true)
-      console.log('hi')
-      console.log(props)
+      props.setAuthenticated(true);
     }
-  }
+  };
   return (
     <>
       <Modal
@@ -82,7 +80,7 @@ export default function LoginModal(props) {
               variant='contained'
               color='primary'
               onClick={() => {
-                handleLogin(username, password)
+                handleLogin(username, password);
               }}
             >
               Log in

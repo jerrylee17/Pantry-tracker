@@ -6,7 +6,7 @@ require('dotenv').config();
 
 router.post('/register', async (req, res) => {
 
-})
+});
 
 
 // function getUserID(context) {

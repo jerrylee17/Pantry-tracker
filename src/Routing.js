@@ -24,19 +24,16 @@ function importComponents(routes) {
 
 export default function Routing(props) {
   const [Authenticated, setAuthenticated] = useState(false);
-  console.log(window.localStorage)
-
-  useEffect(() => {
-    onLoad();
-  }, []);
 
   async function onLoad() {
     if (isAuthenticated()) {
       setAuthenticated(true);
-    } else {
-      console.log('Not logged in')
     }
   }
+
+  useEffect(() => {
+    onLoad();
+  }, []);
 
   let routes = importComponents(allRoutes.Routes);
   return (
@@ -62,7 +59,7 @@ export default function Routing(props) {
                 />
               );
             }
-            return true
+            return true;
           }
         )
 

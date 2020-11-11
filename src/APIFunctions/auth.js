@@ -1,18 +1,18 @@
-const { gql, request } = require('graphql-request')
+const { gql, request } = require('graphql-request');
 const { ApiResponse } = require('./ApiResponse');
 
 // Returns current use ID
 async function currentUser() {
-  let token = window.localStorage.getItem("jwt");
-  var base64Url = token.split(".")[1];
-  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-  var jsonPayload = decodeURIComponent(
+  let token = window.localStorage.getItem('jwt');
+  let base64Url = token.split('.')[1];
+  let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  let jsonPayload = decodeURIComponent(
     atob(base64)
-      .split("")
-      .map(function (c) {
-        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      .split('')
+      .map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
       })
-      .join("")
+      .join('')
   );
 
   return JSON.parse(jsonPayload).userID;
@@ -25,7 +25,7 @@ function isAuthenticated() {
       window.localStorage.getItem('jwt') &&
       window.localStorage.getItem('jwt-expire') > Date.now()
     ) {
-      token = window.localStorage.getItem('jwt')
+      token = window.localStorage.getItem('jwt');
     }
   }
   return token;
@@ -48,14 +48,14 @@ async function login(data) {
     }
   }`;
   let response = new ApiResponse();
-  await request(`http://localhost:4000/graphql`, LOGIN_QUERY)
+  await request('http://localhost:4000/graphql', LOGIN_QUERY)
     .then((data) => {
       response.responseData = data.login;
       response.error = false;
     })
     .catch((err) => {
       response.error = true;
-    })
+    });
   if (!response.responseData) {
     response.error = true;
     return response;
@@ -65,7 +65,7 @@ async function login(data) {
   window.localStorage.setItem('jwt-expire',
     Date.now() + response.responseData.tokenExpiration * 60 * 60 * 1000);
   window.location.reload();
-  return response
+  return response;
 }
 
 async function register(data) {
@@ -74,7 +74,7 @@ async function register(data) {
     username,
     password,
     email
-  } = data
+  } = data;
   const REGISTER_MUTATION = gql`
   mutation {
     register(
@@ -89,17 +89,17 @@ async function register(data) {
       email
     }
   }
-  `
+  `;
   let response = new ApiResponse();
-  await request(`http://localhost:4000/graphql`, REGISTER_MUTATION)
+  await request('http://localhost:4000/graphql', REGISTER_MUTATION)
     .then((data) => {
       response.responseData = data.register;
       response.error = false;
     })
     .catch((err) => {
       response.error = true;
-    })
-  return response
+    });
+  return response;
 }
 
 module.exports = {
@@ -107,4 +107,4 @@ module.exports = {
   register,
   isAuthenticated,
   currentUser
-}
+};

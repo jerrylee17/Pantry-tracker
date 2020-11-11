@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard(props) {
   const classes = useStyles();
-  console.log(props)
   const { data, loading, error } = useQuery(USER_QUERY);
   if (loading) {
     return (

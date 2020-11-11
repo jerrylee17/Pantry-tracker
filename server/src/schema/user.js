@@ -1,7 +1,7 @@
 const { UserTC } = require('../../model/preloader');
 const { User } = require('../../model/user');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 
 const UserQuery = {
@@ -9,7 +9,7 @@ const UserQuery = {
   userCount: UserTC.mongooseResolvers.count(),
   userOne: UserTC.mongooseResolvers.findOne(),
   login: {
-    type: `AuthData`,
+    type: 'AuthData',
     args: {
       username: 'String!',
       password: 'String!'
@@ -17,10 +17,10 @@ const UserQuery = {
     resolve: async (source, { username, password }) => {
       const user = await User.findOne({ username: username });
       // user doesn't exist
-      if (!user) return null
-      const loggedIn = await bcrypt.compare(password, user.password)
+      if (!user) return null;
+      const loggedIn = await bcrypt.compare(password, user.password);
       // Password incorrect
-      if (!loggedIn) return null
+      if (!loggedIn) return null;
 
       // Log user in
       const token = jwt.sign({
@@ -28,14 +28,14 @@ const UserQuery = {
         username: user.username,
         email: user.email
       },
-        'averysupersecretkey',
-        { expiresIn: '1h' }
-      )
+      'averysupersecretkey',
+      { expiresIn: '1h' }
+      );
       return {
         userID: user.id,
         token: token,
         tokenExpiration: 1
-      }
+      };
     },
   }
 };
@@ -57,12 +57,12 @@ const UserMutation = {
       // see if user exiists
       const existingUser = await User.findOne({
         $or: [{ username }, { email }]
-      })
+      });
       if (existingUser) {
         // User already created
-        return null
+        return null;
       }
-      const hashedPassword = await bcrypt.hash(password, 12)
+      const hashedPassword = await bcrypt.hash(password, 12);
       const newUser = await User.create(
         {
           name,
@@ -70,8 +70,7 @@ const UserMutation = {
           password: hashedPassword,
           email
         }
-      )
-      console.log(newUser);
+      );
 
       return newUser;
     }

@@ -7,9 +7,9 @@
  * @member {string|null} token - An authentication token
  */
 export class ApiResponse {
-    constructor(error = false, responseData = null) {
-        this.error = error;
-        this.responseData = responseData;
-    }
+  constructor(error = false, responseData = null) {
+    this.error = error;
+    this.responseData = responseData;
+  }
 }
 

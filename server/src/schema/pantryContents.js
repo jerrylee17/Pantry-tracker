@@ -26,9 +26,9 @@ const PantryContentsMutation = {
         contentNames,
         contentAmounts
       } = args;
-      let contentsToPush = []
+      let contentsToPush = [];
       // Must be same length
-      if (contentNames.length != contentAmounts.length) return null
+      if (contentNames.length != contentAmounts.length) return null;
       // Data processing
       for (let i = 0; i < contentNames.length; i++) {
         contentsToPush.push({
@@ -43,7 +43,7 @@ const PantryContentsMutation = {
       );
       await PantryContents.deleteOne(
         { pantry: pantryID }
-      )
+      );
 
       // Put new contents into database
       const contents = await Contents.insertMany(
@@ -57,8 +57,8 @@ const PantryContentsMutation = {
           pantry: pantryID,
           contents: contents.map((item) => (item._id))
         }
-      )
-      return pantryContents
+      );
+      return pantryContents;
     }
   }
 };
