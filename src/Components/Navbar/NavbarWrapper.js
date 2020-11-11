@@ -7,7 +7,7 @@ export default function NavBarWrapper({
 }) {
   return (
     <>
-      <NavBar />
+      <NavBar {...props} />
       <Component {...props} />
     </>
   );

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Fade, makeStyles, TextField, Button } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
+import { login, register } from '../../APIFunctions/auth';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -32,11 +33,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LoginModal(props) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const {
     open,
-    onClose
+    onClose,
   } = props;
   const classes = useStyles();
+  const handleLogin = async (username, password) => {
+    const data = { username, password };
+    const loginStatus = await login(data);
+    if (!loginStatus.error) {
+      props.setAuthenticated(true)
+      console.log('hi')
+      console.log(props)
+    }
+  }
   return (
     <>
       <Modal
@@ -54,6 +66,7 @@ export default function LoginModal(props) {
               label='Username'
               variant='outlined'
               inputProps={{ maxLength: 30 }}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <div className={classes.newLine} />
             <TextField
@@ -62,11 +75,15 @@ export default function LoginModal(props) {
               type='password'
               variant='outlined'
               inputProps={{ maxLength: 30 }}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <div className={classes.newLine} />
             <Button
               variant='contained'
               color='primary'
+              onClick={() => {
+                handleLogin(username, password)
+              }}
             >
               Log in
             </Button>

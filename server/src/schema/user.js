@@ -1,8 +1,5 @@
-const { Pantry } = require('../../model/pantry');
-const { PantryContents } = require('../../model/pantryContents');
 const { UserTC } = require('../../model/preloader');
 const { User } = require('../../model/user');
-const { UserPantries } = require('../../model/userPantries');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 
@@ -63,7 +60,6 @@ const UserMutation = {
       })
       if (existingUser) {
         // User already created
-        console.log('Existing')
         return null
       }
       const hashedPassword = await bcrypt.hash(password, 12)

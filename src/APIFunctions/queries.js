@@ -4,7 +4,7 @@ export const USER_QUERY = (userID) => (gql`
 query getUser {
   userOne(
     filter: {
-      _id: ${userID}
+      _id: "${userID}"
     }
   ) {
     name
@@ -17,7 +17,7 @@ export const PANTRY_CONTENT_QUERY = (pantryID) => (gql`
 query pantryContent{
   pantryContentsOne(
     filter: {
-      pantry: ${pantryID}
+      pantry: "${pantryID}"
     }
   ){
     pantry {
@@ -33,7 +33,7 @@ query pantryContent{
 export const USER_PANTRY_QUERY = (userID) => (gql`
 query userPantry {
   userPantriesOne (
-    filter: {owner:${userID}}
+    filter: {owner:"${userID}"}
   ){
     owner {
       username
@@ -44,4 +44,6 @@ query userPantry {
     }
   }
 }`);
+
+
 

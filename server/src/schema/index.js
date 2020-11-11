@@ -8,9 +8,10 @@ const { PantryContentsQuery, PantryContentsMutation } = require('./pantryContent
 
 schemaComposer.addTypeDefs(`
 type AuthData {
-  userID: ID!
-  token: String!
-  tokenExpiration: Int!
+  userID: ID
+  token: String
+  tokenExpiration: Int
+  error: Boolean
 }`);
 
 schemaComposer.Query.addFields({
@@ -30,11 +31,6 @@ schemaComposer.Mutation.addFields({
 });
 
 const schema = schemaComposer.buildSchema();
-//   `type AuthData {
-//   userID: ID!
-//   token: String!
-//   tokenExpiration: Int!
-// }`);
 
 module.exports = {
   schema

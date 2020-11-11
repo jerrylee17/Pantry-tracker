@@ -21,14 +21,14 @@
         {
             "Name": "Profile",
             "Route": "/profile",
-            "Navbar": "Yes",
-            "Auth": "Profile"
+            "Navbar": "Profile",
+            "Auth": "Yes"
         },
         {
             "Name": "Account",
             "Route": "/account",
-            "Navbar": "Yes",
-            "Auth": "Profile"
+            "Navbar": "Profile",
+            "Auth": "Yes"
         }
     ]
 }
