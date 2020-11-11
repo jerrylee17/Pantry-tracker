@@ -9,7 +9,7 @@ import {
 import { deepPurple } from '@material-ui/core/colors';
 import PantryCard from './PantryCard';
 import { useQuery } from '@apollo/react-hooks';
-import { USER_QUERY } from '../../APIFunctions/user.js';
+import { USER_QUERY } from '../../APIFunctions/queries';
 
 const useStyles = makeStyles((theme) => ({
   profileText: {

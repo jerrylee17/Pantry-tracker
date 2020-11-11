@@ -2,7 +2,7 @@ import { makeStyles, Paper } from '@material-ui/core';
 import React from 'react';
 import VerticalTabs from './tabPanel';
 import { useQuery } from '@apollo/react-hooks';
-import { USER_QUERY } from '../../APIFunctions/user.js';
+import { USER_QUERY } from '../../APIFunctions/queries';
 
 const useStyles = makeStyles((theme) => ({
   dashboardText: {
@@ -33,7 +33,7 @@ export default function Dashboard(props) {
       <p>Error</p>
     );
   }
-  const user = data.userMany[0];
+  const user = data.userOne[0];
   return (
     <>
       <h1 className={classes.dashboardText}>

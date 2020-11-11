@@ -15,7 +15,7 @@ import EmojiFoodBeverageOutlinedIcon from '@material-ui/icons/EmojiFoodBeverageO
 import clsx from 'clsx';
 import { useHistory } from 'react-router-dom';
 import { indigo } from '@material-ui/core/colors';
-import LoginModal from './LoginModal';
+import LoginModal from '../LoginModal/LoginModal';
 const routes = require('../../Routes.json');
 
 const useStyles = makeStyles((theme) => ({
@@ -53,11 +53,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavBar(props) {
   const classes = useStyles();
-  const auth = true;
   const [anchorEl, setAnchorEl] = useState(null);
   const [modal, setModal] = useState(false);
   const profileOpen = Boolean(anchorEl);
   const history = useHistory();
+  const auth = props.Authenticated;
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -185,9 +185,9 @@ export default function NavBar(props) {
                 {routes.Routes.map((route, index) => {
                   if (
                     route.Navbar &&
-                    route.Navbar === 'Yes' &&
+                    route.Navbar === 'Profile' &&
                     route.Auth &&
-                    route.Auth === 'Profile'
+                    route.Auth === 'Yes'
                   ) {
                     return (
                       <MenuItem
@@ -203,12 +203,22 @@ export default function NavBar(props) {
                   }
                   return true;
                 })}
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    props.setAuthenticated(false);
+                    window.localStorage.removeItem('jwt');
+                    window.location.reload();
+                  }}
+                >
+                  Log out
+                </MenuItem>
               </Menu>
             </>
           )}
         </Toolbar>
       </AppBar>
-      <LoginModal {...modalProps} />
+      <LoginModal {...props} {...modalProps} />
     </>
   );
 }

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect
 } from 'react-router-dom';
+import { isAuthenticated } from './APIFunctions/auth';
 import NavBarWrapper from './Components/Navbar/NavbarWrapper';
 
 let allRoutes = require('./Routes.json');
@@ -21,27 +22,44 @@ function importComponents(routes) {
   return newRoutes;
 }
 
-export default function Routing({ appProps }) {
+export default function Routing(props) {
+  const [Authenticated, setAuthenticated] = useState(false);
+
+  async function onLoad() {
+    if (isAuthenticated()) {
+      setAuthenticated(true);
+    }
+  }
+
+  useEffect(() => {
+    onLoad();
+  }, []);
+
   let routes = importComponents(allRoutes.Routes);
   return (
     <Router>
       <Switch>
         {routes.map(
-          ({ path, Component }, index) => {
-            return (
-              <Route
-                key={index}
-                exact
-                path={path}
-                render={(props) => (
-                  <NavBarWrapper
-                    component={Component}
-                    {...props}
-                    {...appProps}
-                  />
-                )}
-              />
-            );
+          ({ Auth, path, Component }, index) => {
+            if ((Auth === 'Yes' && Authenticated) ||
+              Auth !== 'Yes'
+            ) {
+              return (
+                <Route
+                  key={index}
+                  exact
+                  path={path}
+                  render={(props) => (
+                    <NavBarWrapper
+                      component={Component}
+                      {...props}
+                      {...{ Authenticated, setAuthenticated }}
+                    />
+                  )}
+                />
+              );
+            }
+            return true;
           }
         )
 

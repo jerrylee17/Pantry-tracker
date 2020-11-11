@@ -4,10 +4,9 @@ const { composeMongoose } = require('graphql-compose-mongoose');
 
 const PantryContentsSchema = new mongoose.Schema(
   {
-    pantry : {
+    pantry: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Pantry',
-      required: true,
     },
     contents: [
       {
