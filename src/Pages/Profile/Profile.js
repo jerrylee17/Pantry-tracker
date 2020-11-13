@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import {
@@ -10,6 +10,7 @@ import { deepPurple } from '@material-ui/core/colors';
 import PantryCard from './PantryCard';
 import { useQuery } from '@apollo/react-hooks';
 import { USER_QUERY } from '../../APIFunctions/queries';
+import { currentUser } from '../../APIFunctions/auth';
 
 const useStyles = makeStyles((theme) => ({
   profileText: {
@@ -55,19 +56,31 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Profile(props) {
   const classes = useStyles();
-  const { data, loading, error } = useQuery(USER_QUERY);
-  if (loading) {
+  const [userID, setUserID] = useState('')
+  const [loadingPage, setIsLoading] = useState(true)
+  const userInfo = useQuery(USER_QUERY, {
+    variables: { userID }
+  });
+  async function onLoad() {
+    let currUser = await currentUser()
+    setUserID(currUser)
+    setIsLoading(false)
+  }
+  useEffect(() => {
+    onLoad()
+  }, [])
+  if (userInfo.loading) {
     return (
       <p>Loading...</p>
     );
   }
-  if (error) {
+  if (userInfo.error) {
     return (
       <p>Error</p>
     );
   }
-  const user = data.userMany[0];
-  return (
+  const user = userInfo.data.userOne;
+  return !loadingPage && (
     <>
       <h1 className={clsx(classes.profileText)}>Profile</h1>
       <Paper
@@ -82,7 +95,7 @@ export default function Profile(props) {
         </div>
         <div className={classes.viewPantryText}>
           <i>
-            You have {user.pantries.length} pantries.
+            {/* You have {user.pantries.length} pantries. */}
           </i>
         </div>
         <Grid
@@ -90,11 +103,11 @@ export default function Profile(props) {
           justify='center'
           className={classes.pantryDisplayWrapper}
         >
-          {user.pantries.map((pantry, index) => (
+          {/* {user.pantries.map((pantry, index) => (
             <Grid item className={classes.pantryGrid} sm={12} lg={6}>
               <PantryCard key={index} {...pantry} />
             </Grid>
-          ))}
+          ))} */}
         </Grid>
       </Paper>
     </>

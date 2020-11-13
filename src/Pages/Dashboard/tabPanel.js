@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PantryTab from './pantryTab';
 import { Hidden } from '@material-ui/core';
+import { USER_PANTRY_QUERY } from '../../APIFunctions/queries'
+import { useQuery } from 'react-apollo';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -50,13 +52,34 @@ const useStyles = makeStyles((theme) => ({
 
 export default function VerticalTabs(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-  const {
-    pantries
-  } = props;
+  const [selectedTab, setSelectedTab] = useState(0);
+  const [pantrySizes, setPantrySizes] = useState({})
+  const userID = props._id;
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const { data, loading, error } = useQuery(USER_PANTRY_QUERY, {
+    variables: { userID }
+  })
+
+  if (error) {
+    return (<>
+      Error
+    </>);
+  }
+  if (loading) {
+    return (<>
+      Loading
+    </>);
+  }
+
+  const pantries = data.userPantriesOne ? data.userPantriesOne.pantries : []
+
+  const handlePantryLoad = (name, itemCount) => {
+    let newPantrySizes = { ...pantrySizes, [name]: itemCount }
+    setPantrySizes(newPantrySizes)
+  }
+
+  const handleChange = (event, newSelectedTab) => {
+    setSelectedTab(newSelectedTab);
   };
 
   const a11yProps = (index) => {
@@ -66,32 +89,34 @@ export default function VerticalTabs(props) {
     };
   };
 
+  // Make a tab at the bottom that allows you to add pantries
   return (
     <div className={classes.root}>
       <Tabs
         orientation="vertical"
         variant="scrollable"
-        value={value}
+        value={selectedTab}
         onChange={handleChange}
         aria-label="Pantries"
         className={classes.tabs}
       >
         {pantries.map((pantry, index) => {
+          const name = pantry.name
           return (
             <Tab label={
               <>
                 <Typography variant='h5'>
-                  {` ${pantry.name}`}
+                  {` ${name}`}
                 </Typography>
                 <Hidden xsDown>
                   <Typography varient='subtitle'>
-                    {`${pantry.contents.length} items`}
+                    {pantrySizes[name] ? `${pantrySizes[name]} items` : "Click to refresh"}
                   </Typography>
                 </Hidden>
                 <br /><br />
               </>
             }
-            {...a11yProps(index)}
+              {...a11yProps(index)}
             />
           );
         })}
@@ -99,9 +124,9 @@ export default function VerticalTabs(props) {
       {pantries.map((pantry, index) => (
         <TabPanel
           className={classes.tabPanel}
-          value={value} index={index}
+          value={selectedTab} index={index}
         >
-          <PantryTab {...pantry} />
+          <PantryTab {...pantry} {...{ handlePantryLoad }} />
         </TabPanel>
       ))}
     </div>

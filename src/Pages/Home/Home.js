@@ -12,7 +12,6 @@ import map from './images/map.svg';
 import pantrymanagement from './images/pantrymanagement.svg';
 import speed_left from './images/speed_left.svg';
 import stats_right from './images/stats_right.svg';
-const routes = require('../../Routes.json');
 const useStyles = makeStyles((theme) => ({
   header: {
     textAlign: 'center'
@@ -69,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: theme.typography.fontFamily,
     padding: theme.spacing(1),
   },
-  miniImagePepTalk : {
+  miniImagePepTalk: {
     paddingTop: '5%',
     paddingLeft: '23%',
   },
@@ -327,13 +326,13 @@ export default function Home(props) {
             className={`${classes.typography} ${classes.headerText}`}
             inline
           >
-              Tracking the items in your pantry has never been easier
+            Tracking the items in your pantry has never been easier
           </Typography>
           <Typography
             className={`${classes.typography} ${classes.definitionText}`}
             inline
           >
-              Our Pantry tracking solution empowers users with one to several pantries to manage and view their pantries in real time.
+            Our Pantry tracking solution empowers users with one to several pantries to manage and view their pantries in real time.
           </Typography>
         </Grid>
         <Grid
@@ -352,7 +351,7 @@ export default function Home(props) {
             >
               How it comes together
             </Typography>
-            <div className={classes.break}/>
+            <div className={classes.break} />
             <Hidden mdDown>
               <div
                 className={`${classes.mapHiddenBox}`}

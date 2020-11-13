@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
+  Redirect,
   Route,
-  Switch,
-  Redirect
+  Switch
 } from 'react-router-dom';
 import { isAuthenticated } from './APIFunctions/auth';
 import NavBarWrapper from './Components/Navbar/NavbarWrapper';
+import Home from './Pages/Home/Home'
 
 let allRoutes = require('./Routes.json');
 function importComponents(routes) {
@@ -23,49 +24,51 @@ function importComponents(routes) {
 }
 
 export default function Routing(props) {
+  const [Authenticating, setIsAuthenticating] = useState(true);
   const [Authenticated, setAuthenticated] = useState(false);
 
   async function onLoad() {
     if (isAuthenticated()) {
       setAuthenticated(true);
     }
+    setIsAuthenticating(!Authenticating);
   }
 
-  useEffect(() => {
+  useEffect(async () => {
     onLoad();
   }, []);
 
   let routes = importComponents(allRoutes.Routes);
   return (
-    <Router>
+    !Authenticating && (<Router>
       <Switch>
         {routes.map(
           ({ Auth, path, Component }, index) => {
-            if ((Auth === 'Yes' && Authenticated) ||
-              Auth !== 'Yes'
-            ) {
-              return (
-                <Route
-                  key={index}
-                  exact
-                  path={path}
-                  render={(props) => (
-                    <NavBarWrapper
-                      component={Component}
-                      {...props}
-                      {...{ Authenticated, setAuthenticated }}
-                    />
-                  )}
-                />
-              );
-            }
-            return true;
+            return (
+              <Route
+                key={index}
+                exact
+                path={path}
+                render={(props) =>
+                  ((Auth !== 'Yes' ||
+                    (Auth === 'Yes' && Authenticated))) ? (
+                      <NavBarWrapper
+                        component={Component}
+                        {...props}
+                        {...{ Authenticated, setAuthenticated }}
+                      />
+                    )
+                    : (
+                      <Redirect to={'/'} />
+                    )
+                }
+              />
+            );
           }
         )
-
         }
-        <Redirect to='/' />
+        <Route path="/*" component={Home} />
       </Switch>
-    </Router>
+    </Router>)
   );
 }
