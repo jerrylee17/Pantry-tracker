@@ -5,16 +5,24 @@ import {
   Grid,
   Typography,
   Button,
-  Hidden
+  Hidden,
+  createMuiTheme
 } from '@material-ui/core';
 import food_mid from './images/food_mid.svg';
 import map from './images/map.svg';
 import pantrymanagement from './images/pantrymanagement.svg';
 import speed_left from './images/speed_left.svg';
 import stats_right from './images/stats_right.svg';
+import clsx from 'clsx';
+
+
+const routes = require('../../Routes.json');
 const useStyles = makeStyles((theme) => ({
   header: {
     textAlign: 'center'
+  },
+  betterFont: {
+    fontFamily: 'adobe-devanagari !important',
   },
   lightbackground: {
     backgroundColor: '#D3D7FF'
@@ -56,7 +64,6 @@ const useStyles = makeStyles((theme) => ({
     margin: 'auto',
   },
   boxes: {
-    backgroundColor: '#D3D7FF',
     margin: '4vh 4vw 4vh 4vw',
     justifyContent: 'center',
     alignItems: 'center',
@@ -112,6 +119,7 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.overline,
   },
   headerText: {
+    fontFamily: 'adobe-devanagari !important',
     marginTop: '0',
     ...theme.typography.fontWeightBold,
     ...theme.typography.h5,
@@ -136,13 +144,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     margin: 'auto',
   },
-  break: {
-    flexBasis: '100%',
-    height: '20vh',
-  },
-  textMap: {
-    width: '35em',
-  },
   mapHiddenBox: {
     [theme.breakpoints.down('md')]: {
       maxHeight: '0px',
@@ -151,8 +152,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       padding: '4px',
       textAlign: 'center',
-      // height: '20vh',
     }
+  },
+  hiddenBoxGrid: {
+    margin: '0px',
   },
   listText: {
     textAlign: 'left',
@@ -164,23 +167,28 @@ const useStyles = makeStyles((theme) => ({
   map: {
     width: '90vw',
   },
+  learnAboutUsGrid: {
+    display: 'flex',
+    margin: 'auto',
+    justifyContent: 'center',
+    // flexDirection: 'column',
+    alignItems: 'center',
+  },
   learnAboutUsPaper: {
-    backgroundColor: '#D3D7FF',
     margin: '4vh 4vw 4vh 4vw',
     justifyContent: 'center',
-    // alignItems: 'center',
-    // maxHeight: '100px',
-    minHeight: '120px',
-    maxWidth: '72px',
-    minWidth: '50px',
+    alignItems: 'center',
+    maxHeight: '80px',
+    minHeight: '80px',
+    // maxWidth: '72px',
+    minWidth: '150px',
     flex: '50%',
-    // flexDirection: 'column',
+    flexDirection: 'column',
     fontFamily: theme.typography.fontFamily,
     padding: theme.spacing(1),
   },
   learnAboutUsBanner: {
     margin: '0px',
-    // height: '400px',
     marginBottom: '10px'
   },
   aboutUsText: {
@@ -199,6 +207,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Home(props) {
+
   const classes = useStyles();
   return (
     <>
@@ -227,7 +236,7 @@ export default function Home(props) {
               elevation={0}
             >
               <Typography
-                className={classes.mainText}
+                className={clsx(classes.mainText, classes.betterFont)}
               >
                 <h1>A Pantry management system that just works</h1>
                 <body1 className={classes.introfont}>Figure out the food items in your pantry with a click of a button.</body1>
@@ -236,7 +245,7 @@ export default function Home(props) {
           </Grid>
         </Grid>
         <Grid
-          className={`${classes.boxesRow} ${classes.darkbanner}`}
+          className={clsx(classes.boxesRow, classes.darkbanner)}
           container
           spacing={1}
           xs={12}
@@ -250,18 +259,18 @@ export default function Home(props) {
               justifyContent='center'
             >
               <Paper
-                className={classes.boxes}
+                className={clsx(classes.boxes, classes.lightbackground)}
                 justifyContent='center'
                 elevation={3}
                 spacing={3}
               >
                 <img
-                  className={`${classes.miniImagePepTalk} ${classes.leftImage}`}
+                  className={clsx(classes.miniImagePepTalk, classes.leftImage)}
                   src={speed_left}
                   alt='fast updates'
                 />
                 <Typography
-                  className={classes.typography}
+                  className={clsx(classes.typography, classes.betterFont)}
                 >
                   Changes in your pantry will be reflected on the website immediately
                 </Typography>
@@ -272,16 +281,16 @@ export default function Home(props) {
               xs={4}
             >
               <Paper
-                className={classes.boxes}
+                className={clsx(classes.boxes, classes.lightbackground)}
                 elevation={3}
               >
                 <img
-                  className={`${classes.miniImagePepTalk} ${classes.midImage}`}
+                  className={clsx(classes.miniImagePepTalk, classes.midImage)}
                   src={food_mid}
                   alt='food suggestions'
                 />
                 <Typography
-                  className={classes.typography}
+                  className={clsx(classes.typography, classes.betterFont)}
                 >
                   Get smart food suggestions based on what you eat
                 </Typography>
@@ -292,16 +301,16 @@ export default function Home(props) {
               xs={4}
             >
               <Paper
-                className={classes.boxes}
+                className={clsx(classes.boxes, classes.lightbackground)}
                 elevation={3}
               >
                 <img
-                  className={`${classes.miniImagePepTalk} ${classes.rightImage}`}
+                  className={clsx(classes.miniImagePepTalk, classes.rightImage)}
                   src={stats_right}
                   alt='can see pantry status'
                 />
                 <Typography
-                  className={classes.typography}
+                  className={clsx(classes.typography, classes.betterFont)}
                 >
                   Track information for as many pantries as you want
                 </Typography>
@@ -311,25 +320,25 @@ export default function Home(props) {
         </Grid>
         <Grid
           container
-          className={`${classes.lightbackground} ${classes.textbox}`}
+          className={clsx(classes.lightbackground, classes.textbox)}
           justify='center'
           spacing={3}
           xs={12}
         >
           <Typography
-            className={`${classes.typography} ${classes.subtitleText}`}
+            className={clsx(classes.typography, classes.subtitleText, classes.betterFont)}
             inline
           >
             <em>MANAGEMENT AND MONITORING TOOLS FOR YOUR Pantry</em>
           </Typography>
           <Typography
-            className={`${classes.typography} ${classes.headerText}`}
+            className={clsx(classes.typography, classes.headerText, classes.betterFont)}
             inline
           >
             Tracking the items in your pantry has never been easier
           </Typography>
           <Typography
-            className={`${classes.typography} ${classes.definitionText}`}
+            className={clsx(classes.typography, classes.definitionText, classes.betterFont)}
             inline
           >
             Our Pantry tracking solution empowers users with one to several pantries to manage and view their pantries in real time.
@@ -337,68 +346,73 @@ export default function Home(props) {
         </Grid>
         <Grid
           container
-          className={`${classes.darkbanner} ${classes.mapRow}`}
+          className={clsx(classes.darkbanner, classes.mapRow, classes.mappedImgBox)}
           justify='center'
           spacing={3}
           xs={12}
         >
-          <div
-            className={classes.mappedImgBox}
+          <Grid
+            item
+            className={classes.hiddenBoxGrid}
+            xs={12}
           >
             <Typography
-              className={`${classes.typography} ${classes.headerText} ${classes.textMap}`}
-              inline
+              className={clsx(classes.typography, classes.headerText, classes.betterFont)}
             >
               How it comes together
             </Typography>
-            <div className={classes.break} />
-            <Hidden mdDown>
-              <div
-                className={`${classes.mapHiddenBox}`}
-              >
-                <img
-                  className={classes.map}
-                  src={map}
-                  alt='map'
-                />
-              </div>
-            </Hidden>
-            <Hidden lgUp>
+          </Grid>
+          <Hidden mdDown>
+            <div
+              className={classes.mapHiddenBox}
+            >
+              <img
+                className={classes.map}
+                src={map}
+                alt='map'
+              />
+            </div>
+          </Hidden>
+          <Hidden lgUp>
+            <Grid
+              item
+              xs={12}
+            >
               <Typography
-                className={`${classes.typography} ${classes.definitionText} ${classes.listText}`}
+                className={clsx(classes.typography, classes.definitionText, classes.listText, classes.betterFont)}
                 inline
               >
                 1. A user purchases a Raspberry Pi with a camera from us and installs it onto their pantry.
               </Typography>
               <Typography
-                className={`${classes.typography} ${classes.definitionText} ${classes.listText}`}
+                className={clsx(classes.typography, classes.definitionText, classes.listText, classes.betterFont)}
                 inline
               >
                 2. The Pi controls the camera to take pictures of the pantry and then transmits it to our AWS server
               </Typography>
               <Typography
-                className={`${classes.typography} ${classes.definitionText} ${classes.listText}`}
+                className={clsx(classes.typography, classes.definitionText, classes.listText, classes.betterFont)}
                 inline
               >
                 3. The AWS server batches the images and processes the data through a neural network
               </Typography>
               <Typography
-                className={`${classes.typography} ${classes.definitionText} ${classes.listText}`}
+                className={clsx(classes.typography, classes.definitionText, classes.listText, classes.betterFont)}
                 inline
               >
                 4. After determining the food contents, the AWS server then updates the website server for that users account
               </Typography>
               <Typography
-                className={`${classes.typography} ${classes.definitionText} ${classes.listText}`}
+                className={clsx(classes.typography, classes.definitionText, classes.listText, classes.betterFont)}
                 inline
               >
                 5. When the user next accesses the website, their pantry contents will be rendered for them to see
               </Typography>
-            </Hidden>
-          </div>
+            </Grid>
+          </Hidden>
         </Grid>
         <Grid
-          className={`${classes.learnAboutUsBanner} ${classes.boxesRow}`}
+          className={clsx(classes.learnAboutUsBanner, classes.boxesRow)}
           container
           justify='center'
           spacing={3}
@@ -411,55 +425,69 @@ export default function Home(props) {
             xs={12}
           >
             <Typography
-              className={`${classes.typography} ${classes.subtitleText}`}
+              className={clsx(classes.typography, classes.subtitleText, classes.betterFont)}
               inline
             >
               LEARN MORE ABOUT US
             </Typography>
             <Typography
-              className={`${classes.typography} ${classes.headerText}`}
+              className={clsx(classes.typography, classes.headerText, classes.betterFont)}
               inline
             >
               Interested in the application or its creators?
             </Typography>
           </Grid>
-          <Paper
-            className={`${classes.lightbackground} ${classes.typography}`}
-          >
-            <Typography
-              className={classes.aboutUsText}
+            <Grid
+              item
+              className={classes.learnAboutUsGrid}
+              justifyContent='center'
+              xs={6}
             >
-              What's in your pantry was created by seniors at San Jose State University
-            </Typography>
-            <Button
-              href="/about"
+              <Paper
+                className={clsx(classes.learnAboutUsPaper, classes.medbackground)}
+              >
+                <Typography
+                  className={clsx(classes.aboutUsText, classes.betterFont)}
+                >
+                  What's in your pantry was created by seniors at San Jose State University
+                </Typography>
+                <Button
+                  href="/about"
+                >
+                  Learn More
+                </Button>
+              </Paper>
+            </Grid>
+            <Grid
+              item
+              className={classes.learnAboutUsGrid}
+              justifyContent='center'
+              xs={6}
             >
-              Learn More
-            </Button>
-          </Paper>
-          <Paper
-            className={`${classes.lightbackground} ${classes.typography}`}
-          >
-            <Typography
-              className={classes.aboutUsText}
-            >
-              The application and all of the code needed to run it can be found on github
-            </Typography>
-            <Button
-              href="https://github.com/jerrylee17/Pantry-tracker"
-            >
-              Learn More
-            </Button>
-          </Paper>
+              <Paper
+                className={clsx(classes.learnAboutUsPaper, classes.medbackground)}
+              >
+                <Typography
+                  className={clsx(classes.aboutUsText, classes.betterFont)}
+                >
+                  The application and all of the code needed to run it can be found on github
+                </Typography>
+                <Button
+                  href="https://github.com/jerrylee17/Pantry-tracker"
+                >
+                  Learn More
+                </Button>
+              </Paper>
+            </Grid>
         </Grid>
         <Grid
           container
-          className={`${classes.darkbackground} ${classes.darkbanner} ${classes.disclaimerText}`}
+          className={clsx(classes.darkbackground, classes.darkbanner, classes.disclaimerText)}
           spacing={3}
           xs={12}
         >
           <Typography
-            className={`${classes.typography} ${classes.subtitleText}`}
+            className={clsx(classes.typography, classes.subtitleText, classes.betterFont)}
             inline
           >
             What's in your pantry - Copyright © 2020
