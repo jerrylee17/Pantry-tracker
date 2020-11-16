@@ -1,6 +1,6 @@
 const { UserTC } = require('../../model/preloader');
 const { User } = require('../../model/user');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt-nodejs');
 const jwt = require('jsonwebtoken');
 const { UserPantries } = require('../../model/userPantries');
 

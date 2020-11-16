@@ -2,8 +2,14 @@ const { ApolloServer, gql } = require('apollo-server-express');
 const { createTestClient } = require('apollo-server-testing');
 const { schema } = require('../schema/index.js');
 
+const mocks = {
+    _id: () => '5fffff',
+    String: () => 'hi',
+}
+
 const server = new ApolloServer({
     schema,
+    mocks
 });
 
 const { query, mutate } = createTestClient(server);
@@ -12,7 +18,6 @@ test('does a simple pantry many query', async () => {
     const PANTRYMANY = gql`
         query {
             pantryMany {
-                _id
                 name
             }
         }
