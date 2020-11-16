@@ -1,5 +1,6 @@
 const { gql, request } = require('graphql-request');
 const { ApiResponse } = require('./ApiResponse');
+const bcrypt = require('bcryptjs');
 
 // Returns current use ID
 async function currentUser() {
@@ -9,13 +10,14 @@ async function currentUser() {
   let jsonPayload = decodeURIComponent(
     atob(base64)
       .split('')
-      .map(function(c) {
+      .map(function (c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
       })
       .join('')
   );
 
-  return JSON.parse(jsonPayload).userID;
+  let user = JSON.parse(jsonPayload).userID;
+  return user
 }
 
 function isAuthenticated() {
@@ -48,7 +50,7 @@ async function login(data) {
     }
   }`;
   let response = new ApiResponse();
-  await request('http://localhost:4000/graphql', LOGIN_QUERY)
+  await request(`http://localhost:4000/graphql`, LOGIN_QUERY)
     .then((data) => {
       response.responseData = data.login;
       response.error = false;
@@ -91,7 +93,86 @@ async function register(data) {
   }
   `;
   let response = new ApiResponse();
-  await request('http://localhost:4000/graphql', REGISTER_MUTATION)
+  await request(`http://localhost:4000/graphql`, REGISTER_MUTATION)
+    .then((data) => {
+      response.responseData = data.register;
+      response.error = false;
+    })
+    .catch((err) => {
+      response.error = true;
+    });
+  return response;
+}
+
+async function updateAccount(data) {
+  const {
+    userID,
+    name,
+    username,
+    email,
+    passwordInfo
+  } = data;
+  const {
+    newPassword,
+    changePassword
+  } = passwordInfo;
+  let password;
+  if (changePassword) {
+    // hash password
+    password = await bcrypt.hash(newPassword, 12)
+  } else {
+    password = newPassword
+  }
+  console.log(newPassword)
+  const UPDATE_USER = gql`
+  mutation {
+    userUpdateOne(
+      filter:{_id:"${userID}"},
+      record:{
+        name:"${name}",
+        username:"${username}",
+        email:"${email}",
+        ${changePassword ? 'password:"${password}"' : ''}
+      }
+    ) {
+      recordId
+      record {
+        name
+        username
+        email
+      }
+    }
+  }`;
+  let response = new ApiResponse();
+  await request(`http://localhost:4000/graphql`, UPDATE_USER)
+    .then((data) => {
+      response.responseData = data.register;
+      response.error = false;
+    })
+    .catch((err) => {
+      response.error = true;
+    });
+  return response;
+}
+
+async function deleteAccount(data) {
+  const {
+    userID
+  } = data
+  const DELETE_ACCOUNT = gql`
+  mutation{
+    userRemoveOne (filter: {userID: "${userID}") {
+      recordId
+      record {
+        name
+        username
+        email
+      }
+    }
+  }
+  `;
+  let response = new ApiResponse();
+  await request(`http://localhost:4000/graphql`, DELETE_ACCOUNT)
     .then((data) => {
       response.responseData = data.register;
       response.error = false;
@@ -106,5 +187,7 @@ module.exports = {
   login,
   register,
   isAuthenticated,
-  currentUser
+  currentUser,
+  deleteAccount,
+  updateAccount
 };

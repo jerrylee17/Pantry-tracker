@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Table,
   TableHead,
@@ -11,6 +11,8 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import { purple } from '@material-ui/core/colors';
 import clsx from 'clsx';
+import { PANTRY_CONTENT_QUERY } from '../../APIFunctions/queries'
+import { useQuery } from 'react-apollo';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -62,10 +64,31 @@ const StyledTableRow = withStyles((theme) => ({
 
 export default function PantryTab(props) {
   const classes = useStyles();
-  const {
-    name,
-    contents
-  } = props;
+  const pantryID = props._id
+  const { name, handlePantryLoad } = props
+  const { data, loading, error } = useQuery(PANTRY_CONTENT_QUERY, {
+    variables: { pantryID }
+  })
+
+  const contents = data && data.pantryContentsOne ? data.pantryContentsOne.contents : [];
+
+  useEffect(() => {
+    handlePantryLoad(name, contents.length)
+    // eslint-disable-next-line
+  }, [name, contents.length])
+
+  if (error) {
+    return (<>
+      Error
+    </>);
+  }
+  if (loading) {
+    return (<>
+      Loading
+    </>);
+  }
+
+
   return (
     <>
       <h2 className={classes.title}>{name}</h2>
@@ -74,13 +97,16 @@ export default function PantryTab(props) {
           classes.refreshButton,
           classes.refreshButtonPosition
         )}
+        onClick={() => {
+          // refresh pantry
+        }}
       >
         <Hidden mdDown>
           Refresh pantry
         </Hidden>
         <RefreshIcon />
       </Button>
-      <Table className={classes.table} aria-label='pantry-items'>
+      {contents.length ? (<Table className={classes.table} aria-label='pantry-items'>
         <TableHead>
           <StyledTableRow>
             <StyledTableCell>Item</StyledTableCell>
@@ -95,7 +121,9 @@ export default function PantryTab(props) {
             </StyledTableRow>
           ))}
         </TableBody>
-      </Table>
+      </Table>) : (
+          <h2>You have no items!</h2>
+        )}
     </>
   );
 }

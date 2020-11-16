@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import {
@@ -21,6 +21,7 @@ import {
 import { red } from '@material-ui/core/colors';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { currentUser } from '../../APIFunctions/auth';
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
