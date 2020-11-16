@@ -28,7 +28,6 @@
     "lodash": "^4.17.20",
     "mongoose": "^5.10.7",
     "mongoose-timestamp": "^0.6.0",
-    "nodemon": "^2.0.4",
     "pg": "^8.3.3",
     "react": "^16.13.1",
     "react-apollo": "^3.1.5",
@@ -61,5 +60,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }

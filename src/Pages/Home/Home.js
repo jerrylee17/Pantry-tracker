@@ -56,7 +56,6 @@ const useStyles = makeStyles((theme) => ({
     margin: 'auto',
   },
   boxes: {
-    backgroundColor: '#D3D7FF',
     margin: '4vh 4vw 4vh 4vw',
     justifyContent: 'center',
     alignItems: 'center',
@@ -136,13 +135,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     margin: 'auto',
   },
-  break: {
-    flexBasis: '100%',
-    height: '20vh',
-  },
-  textMap: {
-    width: '35em',
-  },
   mapHiddenBox: {
     [theme.breakpoints.down('md')]: {
       maxHeight: '0px',
@@ -151,8 +143,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       padding: '4px',
       textAlign: 'center',
-      // height: '20vh',
     }
+  },
+  hiddenBoxGrid: {
+    margin: '0px',
   },
   listText: {
     textAlign: 'left',
@@ -164,23 +158,28 @@ const useStyles = makeStyles((theme) => ({
   map: {
     width: '90vw',
   },
+  learnAboutUsGrid: {
+    display: 'flex',
+    margin: 'auto',
+    justifyContent: 'center',
+    // flexDirection: 'column',
+    alignItems: 'center',
+  },
   learnAboutUsPaper: {
-    backgroundColor: '#D3D7FF',
     margin: '4vh 4vw 4vh 4vw',
     justifyContent: 'center',
-    // alignItems: 'center',
-    // maxHeight: '100px',
-    minHeight: '120px',
-    maxWidth: '72px',
-    minWidth: '50px',
+    alignItems: 'center',
+    maxHeight: '80px',
+    minHeight: '80px',
+    // maxWidth: '72px',
+    minWidth: '150px',
     flex: '50%',
-    // flexDirection: 'column',
+    flexDirection: 'column',
     fontFamily: theme.typography.fontFamily,
     padding: theme.spacing(1),
   },
   learnAboutUsBanner: {
     margin: '0px',
-    // height: '400px',
     marginBottom: '10px'
   },
   aboutUsText: {
@@ -250,7 +249,7 @@ export default function Home(props) {
               justifyContent='center'
             >
               <Paper
-                className={classes.boxes}
+                className={`${classes.boxes} ${classes.lightbackground}`}
                 justifyContent='center'
                 elevation={3}
                 spacing={3}
@@ -272,7 +271,7 @@ export default function Home(props) {
               xs={4}
             >
               <Paper
-                className={classes.boxes}
+                className={`${classes.boxes} ${classes.lightbackground}`}
                 elevation={3}
               >
                 <img
@@ -292,7 +291,7 @@ export default function Home(props) {
               xs={4}
             >
               <Paper
-                className={classes.boxes}
+                className={`${classes.boxes} ${classes.lightbackground}`}
                 elevation={3}
               >
                 <img
@@ -337,33 +336,39 @@ export default function Home(props) {
         </Grid>
         <Grid
           container
-          className={`${classes.darkbanner} ${classes.mapRow}`}
+          className={`${classes.darkbanner} ${classes.mapRow} ${classes.mappedImgBox}`}
           justify='center'
           spacing={3}
           xs={12}
         >
-          <div
-            className={classes.mappedImgBox}
+          <Grid
+            item
+            className={`${classes.hiddenBoxGrid}`}
+            xs={12}
           >
             <Typography
-              className={`${classes.typography} ${classes.headerText} ${classes.textMap}`}
-              inline
+              className={`${classes.typography} ${classes.headerText}`}
             >
               How it comes together
             </Typography>
-            <div className={classes.break} />
-            <Hidden mdDown>
-              <div
-                className={`${classes.mapHiddenBox}`}
-              >
-                <img
-                  className={classes.map}
-                  src={map}
-                  alt='map'
-                />
-              </div>
-            </Hidden>
-            <Hidden lgUp>
+          </Grid>
+          <Hidden mdDown>
+            <div
+              className={`${classes.mapHiddenBox}`}
+            >
+              <img
+                className={classes.map}
+                src={map}
+                alt='map'
+              />
+            </div>
+          </Hidden>
+          <Hidden lgUp>
+            <Grid
+              item
+              // className={`${classes.hiddenBoxGrid}`}
+              xs={12}
+            >
               <Typography
                 className={`${classes.typography} ${classes.definitionText} ${classes.listText}`}
                 inline
@@ -394,8 +399,8 @@ export default function Home(props) {
               >
                 5. When the user next accesses the website, their pantry contents will be rendered for them to see
               </Typography>
-            </Hidden>
-          </div>
+            </Grid>
+          </Hidden>
         </Grid>
         <Grid
           className={`${classes.learnAboutUsBanner} ${classes.boxesRow}`}
@@ -423,34 +428,54 @@ export default function Home(props) {
               Interested in the application or its creators?
             </Typography>
           </Grid>
-          <Paper
-            className={`${classes.lightbackground} ${classes.typography}`}
-          >
-            <Typography
-              className={classes.aboutUsText}
+          {/* <Grid
+            className={classes.learnAboutUsGrid}
+            container
+            xs={12}
+          > */}
+            <Grid
+              item
+              className={classes.learnAboutUsGrid}
+              justifyContent='center'
+              xs={6}
             >
-              What's in your pantry was created by seniors at San Jose State University
-            </Typography>
-            <Button
-              href="/about"
+              <Paper
+                className={`${classes.learnAboutUsPaper} ${classes.medbackground}`}
+              >
+                <Typography
+                  className={classes.aboutUsText}
+                >
+                  What's in your pantry was created by seniors at San Jose State University
+                </Typography>
+                <Button
+                  href="/about"
+                >
+                  Learn More
+                </Button>
+              </Paper>
+            </Grid>
+            <Grid
+              item
+              className={`${classes.learnAboutUsGrid}`}
+              justifyContent='center'
+              xs={6}
             >
-              Learn More
-            </Button>
-          </Paper>
-          <Paper
-            className={`${classes.lightbackground} ${classes.typography}`}
-          >
-            <Typography
-              className={classes.aboutUsText}
-            >
-              The application and all of the code needed to run it can be found on github
-            </Typography>
-            <Button
-              href="https://github.com/jerrylee17/Pantry-tracker"
-            >
-              Learn More
-            </Button>
-          </Paper>
+              <Paper
+                className={`${classes.learnAboutUsPaper} ${classes.medbackground}`}
+              >
+                <Typography
+                  className={classes.aboutUsText}
+                >
+                  The application and all of the code needed to run it can be found on github
+                </Typography>
+                <Button
+                  href="https://github.com/jerrylee17/Pantry-tracker"
+                >
+                  Learn More
+                </Button>
+              </Paper>
+            </Grid>
+          {/* </Grid> */}
         </Grid>
         <Grid
           container
