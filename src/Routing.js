@@ -34,8 +34,9 @@ export default function Routing(props) {
     setIsAuthenticating(!Authenticating);
   }
 
-  useEffect(async () => {
+  useEffect(() => {
     onLoad();
+    // eslint-disable-next-line
   }, []);
 
   let routes = importComponents(allRoutes.Routes);

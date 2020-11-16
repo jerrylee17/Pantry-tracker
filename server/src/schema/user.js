@@ -15,7 +15,9 @@ const UserQuery = {
       password: 'String!'
     },
     resolve: async (source, { username, password }) => {
-      const user = await User.findOne({ username: username });
+      const user = await User.findOne({
+        $or: [{ username }, { email: username }]
+      });
       // user doesn't exist
       if (!user) return null;
       const loggedIn = await bcrypt.compare(password, user.password);
@@ -28,8 +30,8 @@ const UserQuery = {
         username: user.username,
         email: user.email
       },
-      'averysupersecretkey',
-      { expiresIn: '1h' }
+        'averysupersecretkey',
+        { expiresIn: '1h' }
       );
       return {
         userID: user.id,
@@ -54,13 +56,13 @@ const UserMutation = {
       email: 'String!',
     },
     resolve: async (source, { name, username, password, email }) => {
-      // see if user exiists
+      // see if user exists
       const existingUser = await User.findOne({
         $or: [{ username }, { email }]
       });
       if (existingUser) {
         // User already created
-        return null;
+        return false;
       }
       const hashedPassword = await bcrypt.hash(password, 12);
       const newUser = await User.create(
@@ -70,7 +72,9 @@ const UserMutation = {
           password: hashedPassword,
           email
         }
-      );
+      ).catch(() => {
+        return false
+      });
 
       return newUser;
     }

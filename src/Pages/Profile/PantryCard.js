@@ -78,14 +78,6 @@ export default function PantryCard(props) {
   const settingOpen = Boolean(settings);
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
-  // const [userID, setUserID] = useState('')
-  // async function onLoad() {
-  //   let currUser = await currentUser()
-  //   setUserID(currUser)
-  // }
-  // useEffect(() => {
-  //   onLoad()
-  // }, [])
 
   const closeSettings = () => {
     setSettings(null);
