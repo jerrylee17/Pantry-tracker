@@ -29,3 +29,13 @@ yarn-error.log*
 
 # SSH key
 jerry-sp.pem
+# misc
+.DS_Store
+.env.local
+.env.development
+.env.test
+.env.production
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
