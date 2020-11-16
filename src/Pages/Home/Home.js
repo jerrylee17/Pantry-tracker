@@ -13,13 +13,10 @@ import map from './images/map.svg';
 import pantrymanagement from './images/pantrymanagement.svg';
 import speed_left from './images/speed_left.svg';
 import stats_right from './images/stats_right.svg';
-<<<<<<< HEAD
-=======
 import clsx from 'clsx';
 
 
 const routes = require('../../Routes.json');
->>>>>>> changed font so it look nicer
 const useStyles = makeStyles((theme) => ({
   header: {
     textAlign: 'center'
