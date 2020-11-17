@@ -2,6 +2,7 @@ const { UserTC } = require('../../model/preloader');
 const { User } = require('../../model/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { UserPantries } = require('../../model/userPantries');
 
 
 const UserQuery = {
@@ -75,6 +76,12 @@ const UserMutation = {
       ).catch(() => {
         return false
       });
+      // error creating
+      if (!newUser) return null
+
+      const userPantry = await UserPantries.create(
+        { owner: newUser._id }
+      )
 
       return newUser;
     }

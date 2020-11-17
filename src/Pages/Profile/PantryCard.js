@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import {
@@ -21,7 +21,8 @@ import {
 import { red } from '@material-ui/core/colors';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { currentUser } from '../../APIFunctions/auth';
+import { USER_REMOVE_PANTRY } from '../../APIFunctions/mutation';
+import { useMutation } from 'react-apollo';
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -71,9 +72,11 @@ const StyledTableRow = withStyles((theme) => ({
 
 export default function PantryCard(props) {
   const {
-    name,
-    contents
+    contents,
+    userID
   } = props;
+  const [userRemovePantry, { data }] = useMutation(USER_REMOVE_PANTRY)
+  const { name } = props.pantry;
   const [settings, setSettings] = useState(null);
   const settingOpen = Boolean(settings);
   const classes = useStyles();
@@ -88,6 +91,16 @@ export default function PantryCard(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const handleDeletePantry = () => {
+    userRemovePantry({
+      variables: {
+        userID,
+        pantryID: props.pantry._id
+      }
+    })
+  }
+
   return (
     <Card className={classes.card} elevation={10}>
       <CardHeader
@@ -124,6 +137,8 @@ export default function PantryCard(props) {
                 className={classes.delete}
                 onClick={() => {
                   closeSettings();
+                  handleDeletePantry();
+                  window.location.reload()
                   // Remove pantry from database
                   // Might want to pop up a modal
                 }}

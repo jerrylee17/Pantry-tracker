@@ -16,12 +16,12 @@ const UserPantriesMutation = {
   userAddNewPantry: {
     type: UserPantriesTC,
     args: {
-      username: 'String!',
+      userID: 'MongoID!',
       pantryName: 'String!'
     },
     resolve: async (source, args) => {
       const {
-        username,
+        userID,
         pantryName
       } = args;
       // Create pantry
@@ -32,7 +32,7 @@ const UserPantriesMutation = {
       if (!pantry) return null;
 
       // Find user
-      const user = await User.findOne({ username: username });
+      const user = await User.findOne({ _id: userID });
       // if error
       if (!user) return null;
 
@@ -52,15 +52,15 @@ const UserPantriesMutation = {
   userAddExistingPantry: {
     type: UserPantriesTC,
     args: {
-      username: 'String!',
+      userID: 'MongoID!',
       pantryID: 'MongoID!'
     },
     resolve: async (source, args) => {
       const {
-        username,
+        userID,
         pantryID
       } = args;
-      // Create pantry
+      // Find pantry
       const pantry = await Pantry.findOne({
         _id: pantryID
       });
@@ -68,7 +68,7 @@ const UserPantriesMutation = {
       if (!pantry) return null;
 
       // Find user
-      const user = await User.findOne({ username: username });
+      const user = await User.findOne({ _id: userID });
       // if error
       if (!user) return null;
 
@@ -88,17 +88,17 @@ const UserPantriesMutation = {
   userRemovePantry: {
     type: UserPantriesTC,
     args: {
-      username: 'String!',
+      userID: 'MongoID!',
       pantryID: 'MongoID!'
     },
     resolve: async (source, args) => {
       const {
-        username,
+        userID,
         pantryID
       } = args;
 
       // Find user
-      const user = await User.findOne({ username: username });
+      const user = await User.findOne({ _id: userID });
       // if error
       if (!user) return null;
 

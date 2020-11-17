@@ -93,6 +93,7 @@ async function register(data) {
   }
   `;
   let response = new ApiResponse();
+  // Create user
   await request(`http://localhost:4000/graphql`, REGISTER_MUTATION)
     .then((data) => {
       response.responseData = data.register;
@@ -132,7 +133,7 @@ async function updateAccount(data) {
         name:"${name}",
         username:"${username}",
         email:"${email}",
-        ${changePassword ? 'password:"${password}"' : ''}
+        ${changePassword ? `password:"${password}"` : ''}
       }
     ) {
       recordId

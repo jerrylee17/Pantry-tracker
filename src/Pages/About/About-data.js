@@ -2,22 +2,28 @@ export const aboutData = {
   members: [
     {
       name: 'Jerry',
-      description: 'Jerry\'s description',
+      description: `Jerry Lee is a fourth year Computer Engineering student. He graduates
+      in December and is planning to work full time at Capital One while doing his masters.`,
       picture: 'jerry.jpeg',
     },
     {
       name: 'Harley',
-      description: 'Harley\'s description',
+      description: `Harley Tran is stuck in quarantine. Bugs in his code and running out of 
+      milk seems to be the most of his concerns right now.`,
       picture: 'harley.jpeg',
     },
     {
       name: 'Smruthi',
-      description: 'Smruthi\'s description',
+      description: `Smruthi Danda is a third year Computer Engineering student at San Jose
+      State University. Smruthi is interested in pursuing a career in hardware engineering
+      or firmware engineering.`,
       picture: 'smruthi.jpeg',
     },
     {
       name: 'Habib',
-      description: 'Habib\'s description',
+      description: `Habib Sorathia is a student at San Jose State University currently pursuing
+      a Bachelors of Science degree in Computer Engineering, a degree that he hopes will aid him
+      in obtaining a software engineering job in Silicon Valley.`,
       picture: 'habib.jpeg',
     },
   ],

@@ -2,7 +2,7 @@ import { Button, makeStyles, Paper, TextField } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { USER_QUERY } from '../../APIFunctions/queries';
-import { currentUser, deleteAccount, login, register, updateAccount } from '../../APIFunctions/auth';
+import { currentUser, updateAccount } from '../../APIFunctions/auth';
 import Alert from '@material-ui/lab/Alert';
 import clsx from 'clsx';
 
