@@ -6,7 +6,6 @@ import {
   Typography,
   Button,
   Hidden,
-  createMuiTheme
 } from '@material-ui/core';
 import food_mid from './images/food_mid.svg';
 import map from './images/map.svg';
@@ -16,7 +15,6 @@ import stats_right from './images/stats_right.svg';
 import clsx from 'clsx';
 
 
-const routes = require('../../Routes.json');
 const useStyles = makeStyles((theme) => ({
   header: {
     textAlign: 'center'
@@ -437,48 +435,48 @@ export default function Home(props) {
               Interested in the application or its creators?
             </Typography>
           </Grid>
-            <Grid
-              item
-              className={classes.learnAboutUsGrid}
-              justifyContent='center'
-              xs={6}
+          <Grid
+            item
+            className={classes.learnAboutUsGrid}
+            justifyContent='center'
+            xs={6}
+          >
+            <Paper
+              className={clsx(classes.learnAboutUsPaper, classes.medbackground)}
             >
-              <Paper
-                className={clsx(classes.learnAboutUsPaper, classes.medbackground)}
+              <Typography
+                className={clsx(classes.aboutUsText, classes.betterFont)}
               >
-                <Typography
-                  className={clsx(classes.aboutUsText, classes.betterFont)}
-                >
-                  What's in your pantry was created by seniors at San Jose State University
-                </Typography>
-                <Button
-                  href="/about"
-                >
-                  Learn More
-                </Button>
-              </Paper>
-            </Grid>
-            <Grid
-              item
-              className={classes.learnAboutUsGrid}
-              justifyContent='center'
-              xs={6}
+                What's in your pantry was created by seniors at San Jose State University
+              </Typography>
+              <Button
+                href="/about"
+              >
+                Learn More
+              </Button>
+            </Paper>
+          </Grid>
+          <Grid
+            item
+            className={classes.learnAboutUsGrid}
+            justifyContent='center'
+            xs={6}
+          >
+            <Paper
+              className={clsx(classes.learnAboutUsPaper, classes.medbackground)}
             >
-              <Paper
-                className={clsx(classes.learnAboutUsPaper, classes.medbackground)}
+              <Typography
+                className={clsx(classes.aboutUsText, classes.betterFont)}
               >
-                <Typography
-                  className={clsx(classes.aboutUsText, classes.betterFont)}
-                >
-                  The application and all of the code needed to run it can be found on github
-                </Typography>
-                <Button
-                  href="https://github.com/jerrylee17/Pantry-tracker"
-                >
-                  Learn More
-                </Button>
-              </Paper>
-            </Grid>
+                The application and all of the code needed to run it can be found on github
+              </Typography>
+              <Button
+                href="https://github.com/jerrylee17/Pantry-tracker"
+              >
+                Learn More
+              </Button>
+            </Paper>
+          </Grid>
         </Grid>
         <Grid
           container

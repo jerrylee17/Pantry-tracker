@@ -40,24 +40,24 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Account(props) {
   const classes = useStyles();
-  const [init, setInit] = useState(false)
-  const [userID, setUserID] = useState('')
+  const [init, setInit] = useState(false);
+  const [userID, setUserID] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [changePassword, setChangePassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [infoError, setInfoError] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
-  const [complete, setComplete] = useState(false)
+  const [infoError, setInfoError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [complete, setComplete] = useState(false);
   async function onLoad() {
-    let currUser = await currentUser()
-    setUserID(currUser)
+    let currUser = await currentUser();
+    setUserID(currUser);
   }
   useEffect(() => {
-    onLoad()
-  }, [])
+    onLoad();
+  }, []);
   const { data, loading, error } = useQuery(USER_QUERY, {
     variables: { userID }
   });
@@ -71,12 +71,19 @@ export default function Account(props) {
       <p>Error</p>
     );
   }
+  const checkEmail = () => {
+    const emailRegex = RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}/);
+    return emailRegex.test(email);
+  };
 
+  const checkPasswords = () => {
+    return !password || (password === confirmPassword);
+  };
 
   const handleInfochange = async () => {
     if (!checkPasswords()) {
-      setInfoError(true)
-      setErrorMessage('Passwords do not match!')
+      setInfoError(true);
+      setErrorMessage('Passwords do not match!');
       return;
     }
     if (!checkEmail()) {
@@ -85,8 +92,8 @@ export default function Account(props) {
       return;
     }
     // Passed password check
-    setInfoError(false)
-    setErrorMessage('')
+    setInfoError(false);
+    setErrorMessage('');
     const userData = {
       userID,
       name: name || data.userOne.name,
@@ -96,31 +103,23 @@ export default function Account(props) {
         newPassword: password
       },
       email: email || data.userOne.email,
-    }
-    const response = await updateAccount(userData)
+    };
+    const response = await updateAccount(userData);
     if (!response.error) {
-      setComplete(true)
+      setComplete(true);
     }
-  }
+  };
 
-  const checkEmail = () => {
-    const emailRegex = RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}/);
-    return emailRegex.test(email)
-  }
-
-  const checkPasswords = () => {
-    return !password || (password === confirmPassword)
-  }
   const initValues = (user) => {
-    setEmail(user.email)
-    setName(user.name)
-    setUsername(user.username)
-    setPassword(user.password)
-    setInit(true)
-  }
+    setEmail(user.email);
+    setName(user.name);
+    setUsername(user.username);
+    setPassword(user.password);
+    setInit(true);
+  };
 
   const user = data.userOne;
-  if (!init) initValues(user)
+  if (!init) initValues(user);
 
   return (
     <>
@@ -132,10 +131,10 @@ export default function Account(props) {
               infoError ? <Alert severity='error'>
                 {errorMessage}
               </Alert> : (
-                  complete ? <Alert severity='success'>
+                complete ? <Alert severity='success'>
                     Successfully Changed Settings!
-              </Alert> : ''
-                )
+                </Alert> : ''
+              )
             }
           </div>
           <div className={classes.newLine} />
@@ -176,11 +175,11 @@ export default function Account(props) {
             inputProps={{ maxLength: 24 }}
             onChange={(e) => {
               if (e.target.value) {
-                setChangePassword(true)
+                setChangePassword(true);
               } else {
-                setChangePassword(false)
+                setChangePassword(false);
               }
-              setPassword(e.target.value)
+              setPassword(e.target.value);
             }}
           />
           <div className={classes.newLine} />
@@ -192,11 +191,11 @@ export default function Account(props) {
             inputProps={{ maxLength: 24 }}
             onChange={(e) => {
               if (e.target.value) {
-                setChangePassword(true)
+                setChangePassword(true);
               } else {
-                setChangePassword(false)
+                setChangePassword(false);
               }
-              setConfirmPassword(e.target.value)
+              setConfirmPassword(e.target.value);
             }}
           />
           <div className={classes.newLine} />

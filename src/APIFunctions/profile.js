@@ -30,7 +30,7 @@ async function getProfile(data) {
       }
     }
   }`;
-  await request(`http://localhost:4000/graphql`, USER_QUERY)
+  await request('http://localhost:4000/graphql', USER_QUERY)
     .then((data) => {
       response.responseData = data.userOne;
     })
@@ -38,20 +38,22 @@ async function getProfile(data) {
       response.error = true;
       return response;
     });
-  await request(`http://localhost:4000/graphql`, USER_PANTRY_QUERY)
+  await request('http://localhost:4000/graphql', USER_PANTRY_QUERY)
     .then((data) => {
-      response.responseData.pantries = data.userPantriesOne.pantries;
+      response.responseData.pantries = data.userPantriesOne ?
+        data.userPantriesOne.pantries : [];
     })
     .catch((err) => {
       response.error = true;
       return response;
     });
+  if (!response.responseData.pantries.length) return response;
 
   const PANTRY_CONTENTS_QUERY = gql`
   {
     pantryContentsMany(
-      filter:{OR :[${response.responseData.pantries.map((pantry) => (
-    `{pantry:"${pantry._id}"}`
+      filter:{OR :[${response.responseData.pantries.map((pantry) => (pantry ?
+    `{pantry:"${pantry._id}"}` : ''
   ))}]}
     ) {
       pantry {
@@ -64,7 +66,7 @@ async function getProfile(data) {
       }
     }
   }`;
-  await request(`http://localhost:4000/graphql`, PANTRY_CONTENTS_QUERY)
+  await request('http://localhost:4000/graphql', PANTRY_CONTENTS_QUERY)
     .then((data) => {
       response.responseData.pantries = data.pantryContentsMany;
     })
@@ -72,7 +74,7 @@ async function getProfile(data) {
       response.error = true;
       return response;
     });
-  return response
+  return response;
 }
 
 

@@ -1,4 +1,5 @@
 const { Pantry } = require('../../model/pantry');
+const { PantryContents } = require('../../model/pantryContents');
 const { UserPantries, UserPantriesTC } = require('../../model/preloader');
 const { User } = require('../../model/user');
 
@@ -46,6 +47,15 @@ const UserPantriesMutation = {
           useFindAndModify: false,
         },
       );
+
+      // Create pantryContents with this pantry with empty array
+      await PantryContents.create(
+        {
+          pantry: pantry._id,
+          contents: []
+        }
+      );
+
       return userPantryEntry;
     }
   },

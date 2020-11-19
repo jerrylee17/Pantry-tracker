@@ -11,7 +11,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import { purple } from '@material-ui/core/colors';
 import clsx from 'clsx';
-import { PANTRY_CONTENT_QUERY } from '../../APIFunctions/queries'
+import { PANTRY_CONTENT_QUERY } from '../../APIFunctions/queries';
 import { useQuery } from 'react-apollo';
 
 const useStyles = makeStyles((theme) => ({
@@ -64,16 +64,16 @@ const StyledTableRow = withStyles((theme) => ({
 
 export default function PantryTab(props) {
   const classes = useStyles();
-  const pantryID = props._id
-  const { name, handlePantryLoad } = props
+  const pantryID = props._id;
+  const { name, handlePantryLoad } = props;
   const { data, loading, error } = useQuery(PANTRY_CONTENT_QUERY, {
     variables: { pantryID }
-  })
+  });
 
   const contents = data && data.pantryContentsOne ? data.pantryContentsOne.contents : [];
 
   useEffect(() => {
-    handlePantryLoad(name, contents.length)
+    handlePantryLoad(name, contents.length);
     // eslint-disable-next-line
   }, [name, contents.length])
 
@@ -87,7 +87,6 @@ export default function PantryTab(props) {
       Loading
     </>);
   }
-
 
   return (
     <>
@@ -122,8 +121,8 @@ export default function PantryTab(props) {
           ))}
         </TableBody>
       </Table>) : (
-          <h2>You have no items!</h2>
-        )}
+        <h3>You have no items!</h3>
+      )}
     </>
   );
 }

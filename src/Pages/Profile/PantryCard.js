@@ -75,7 +75,7 @@ export default function PantryCard(props) {
     contents,
     userID
   } = props;
-  const [userRemovePantry, { data }] = useMutation(USER_REMOVE_PANTRY)
+  const [userRemovePantry] = useMutation(USER_REMOVE_PANTRY);
   const { name } = props.pantry;
   const [settings, setSettings] = useState(null);
   const settingOpen = Boolean(settings);
@@ -98,8 +98,8 @@ export default function PantryCard(props) {
         userID,
         pantryID: props.pantry._id
       }
-    })
-  }
+    });
+  };
 
   return (
     <Card className={classes.card} elevation={10}>
@@ -138,7 +138,7 @@ export default function PantryCard(props) {
                 onClick={() => {
                   closeSettings();
                   handleDeletePantry();
-                  window.location.reload()
+                  window.location.reload();
                   // Remove pantry from database
                   // Might want to pop up a modal
                 }}
@@ -152,7 +152,7 @@ export default function PantryCard(props) {
       />
       <CardMedia
         className={classes.image}
-        image={require('./fridge.jpg')} // INSERT IMAGE HERE
+        image={require('./background.jpg')} // INSERT IMAGE HERE
         title={name}
       />
       <CardActions disableSpacing>

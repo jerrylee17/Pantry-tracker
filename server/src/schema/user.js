@@ -31,8 +31,8 @@ const UserQuery = {
         username: user.username,
         email: user.email
       },
-        'averysupersecretkey',
-        { expiresIn: '1h' }
+      'averysupersecretkey',
+      { expiresIn: '1h' }
       );
       return {
         userID: user.id,
@@ -74,14 +74,14 @@ const UserMutation = {
           email
         }
       ).catch(() => {
-        return false
+        return false;
       });
       // error creating
-      if (!newUser) return null
+      if (!newUser) return null;
 
       const userPantry = await UserPantries.create(
         { owner: newUser._id }
-      )
+      );
 
       return newUser;
     }

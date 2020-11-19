@@ -55,23 +55,23 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Profile(props) {
   const classes = useStyles();
-  const [user, setUser] = useState({})
-  const [loadingPage, setIsLoading] = useState(true)
+  const [user, setUser] = useState({});
+  const [loadingPage, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
 
   async function onLoad() {
-    let currUser = await currentUser()
-    let userInfo = await getProfile({ userID: currUser })
+    let currUser = await currentUser();
+    let userInfo = await getProfile({ userID: currUser });
     if (userInfo.error) {
-      setError(true)
+      setError(true);
     } else {
-      setUser(userInfo.responseData)
+      setUser(userInfo.responseData);
     }
-    setIsLoading(false)
+    setIsLoading(false);
   }
   useEffect(() => {
-    onLoad()
-  }, [])
+    onLoad();
+  }, []);
   if (loadingPage) {
     return (
       <p>Loading...</p>
@@ -105,11 +105,13 @@ export default function Profile(props) {
           justify='center'
           className={classes.pantryDisplayWrapper}
         >
-          {user.pantries.map((pantry, index) => (
-            <Grid item className={classes.pantryGrid} sm={12} lg={6}>
-              <PantryCard key={index} {...pantry} {...{ userID: user._id }} />
-            </Grid>
-          ))}
+          {user.pantries.map((pantry, index) => {
+            return (
+              <Grid item className={classes.pantryGrid} sm={12} lg={6}>
+                <PantryCard key={index} {...pantry} {...{ userID: user._id }} />
+              </Grid>
+            );
+          })}
         </Grid>
       </Paper>
     </>

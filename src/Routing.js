@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { isAuthenticated } from './APIFunctions/auth';
 import NavBarWrapper from './Components/Navbar/NavbarWrapper';
-import Home from './Pages/Home/Home'
+import Home from './Pages/Home/Home';
 
 let allRoutes = require('./Routes.json');
 function importComponents(routes) {

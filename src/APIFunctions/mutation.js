@@ -36,3 +36,19 @@ mutation ($userID:MongoID!, $pantryID:MongoID!){
 }
 `;
 
+export const USER_ADD_NEW_PANTRY = gql`
+mutation($userID: MongoID!, $pantryName: String!) {
+  userAddNewPantry(userID: $userID, pantryName: $pantryName) {
+    owner {
+      _id
+      name
+      username
+    }
+    pantries {
+      _id
+      name
+    }
+  }
+}
+`;
+
