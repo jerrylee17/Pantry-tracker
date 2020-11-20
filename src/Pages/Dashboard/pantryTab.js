@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Table,
   TableHead,
   TableRow,
   TableCell,
   TableBody,
-  Button, Hidden
+  Button, Hidden, IconButton, Tooltip
 } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import RefreshIcon from '@material-ui/icons/Refresh';
-import { purple } from '@material-ui/core/colors';
+import { green, purple } from '@material-ui/core/colors';
 import clsx from 'clsx';
 import { PANTRY_CONTENT_QUERY } from '../../APIFunctions/queries';
 import { useQuery } from 'react-apollo';
+import { FileCopyOutlined } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -40,6 +41,13 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('md')]: {
       marginBottom: '2vh'
     }
+  },
+  toolTipFontSize: {
+    fontSize: 12
+  },
+  toolTipCopied: {
+    backgroundColor: green[600],
+    color: theme.palette.getContrastText(green[600])
   }
 }));
 
@@ -65,6 +73,7 @@ const StyledTableRow = withStyles((theme) => ({
 export default function PantryTab(props) {
   const classes = useStyles();
   const pantryID = props._id;
+  const [copyID, setCopyID] = useState(false)
   const { name, handlePantryLoad } = props;
   const { data, loading, error } = useQuery(PANTRY_CONTENT_QUERY, {
     variables: { pantryID }
@@ -88,9 +97,44 @@ export default function PantryTab(props) {
     </>);
   }
 
+
+
+
+  const copyPantryID = async () => {
+    // Select text
+    const idField = document.createElement('textarea');
+    idField.value = pantryID;
+    document.body.appendChild(idField);
+    idField.select();
+    document.execCommand('copy');
+    document.body.removeChild(idField);
+    await document.getElementById('copy-pantry-id')
+    setCopyID(true)
+  }
+
   return (
     <>
-      <h2 className={classes.title}>{name}</h2>
+      <h2 className={classes.title}>
+        {name}
+        <Tooltip
+          classes={{ tooltip: clsx(classes.toolTipFontSize, copyID ? classes.toolTipCopied : '') }}
+          id='copy-pantry-id'
+          title={copyID ? 'ID copied to clipboard!' : 'Copy pantry ID'}
+          placement='top'
+          onClick={copyPantryID}
+          onClose={() => {
+            setTimeout(() => {
+              setCopyID(false)
+            }, 100)
+          }}
+          disableFocusListener
+          disableTouchListener
+        >
+          <IconButton>
+            <FileCopyOutlined />
+          </IconButton>
+        </Tooltip>
+      </h2>
       <Button
         className={clsx(
           classes.refreshButton,
@@ -121,8 +165,8 @@ export default function PantryTab(props) {
           ))}
         </TableBody>
       </Table>) : (
-        <h3>You have no items!</h3>
-      )}
+          <h3>You have no items!</h3>
+        )}
     </>
   );
 }
