@@ -13,7 +13,6 @@ function importAll(r) {
   return images;
 }
 let images = importAll(require.context('./images', true, /\.(png|jpe?g|svg)$/));
-// console.log(images);
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -34,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(5),
       padding: theme.spacing(3),
       width: theme.spacing(40),
-      height: theme.spacing(40),
+      height: theme.spacing(46),
       textAlign: 'center',
     },
   },
@@ -51,7 +50,6 @@ export default function About(props) {
       <div className={classes.memberPaper}>
         {aboutData.members.map((member, index) => (
           <Paper elevation={3}>
-
             <img
               src={images[member.picture]}
               alt={member.name}

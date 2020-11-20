@@ -10,14 +10,14 @@ async function currentUser() {
   let jsonPayload = decodeURIComponent(
     atob(base64)
       .split('')
-      .map(function (c) {
+      .map(function(c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
       })
       .join('')
   );
 
   let user = JSON.parse(jsonPayload).userID;
-  return user
+  return user;
 }
 
 function isAuthenticated() {
@@ -50,7 +50,7 @@ async function login(data) {
     }
   }`;
   let response = new ApiResponse();
-  await request(`http://localhost:4000/graphql`, LOGIN_QUERY)
+  await request('http://localhost:4000/graphql', LOGIN_QUERY)
     .then((data) => {
       response.responseData = data.login;
       response.error = false;
@@ -93,7 +93,8 @@ async function register(data) {
   }
   `;
   let response = new ApiResponse();
-  await request(`http://localhost:4000/graphql`, REGISTER_MUTATION)
+  // Create user
+  await request('http://localhost:4000/graphql', REGISTER_MUTATION)
     .then((data) => {
       response.responseData = data.register;
       response.error = false;
@@ -119,11 +120,10 @@ async function updateAccount(data) {
   let password;
   if (changePassword) {
     // hash password
-    password = await bcrypt.hash(newPassword, 12)
+    password = await bcrypt.hash(newPassword, 12);
   } else {
-    password = newPassword
+    password = newPassword;
   }
-  console.log(newPassword)
   const UPDATE_USER = gql`
   mutation {
     userUpdateOne(
@@ -132,7 +132,7 @@ async function updateAccount(data) {
         name:"${name}",
         username:"${username}",
         email:"${email}",
-        ${changePassword ? 'password:"${password}"' : ''}
+        ${changePassword ? `password:"${password}"` : ''}
       }
     ) {
       recordId
@@ -144,7 +144,7 @@ async function updateAccount(data) {
     }
   }`;
   let response = new ApiResponse();
-  await request(`http://localhost:4000/graphql`, UPDATE_USER)
+  await request('http://localhost:4000/graphql', UPDATE_USER)
     .then((data) => {
       response.responseData = data.register;
       response.error = false;
@@ -158,7 +158,7 @@ async function updateAccount(data) {
 async function deleteAccount(data) {
   const {
     userID
-  } = data
+  } = data;
   const DELETE_ACCOUNT = gql`
   mutation{
     userRemoveOne (filter: {userID: "${userID}") {
@@ -172,7 +172,7 @@ async function deleteAccount(data) {
   }
   `;
   let response = new ApiResponse();
-  await request(`http://localhost:4000/graphql`, DELETE_ACCOUNT)
+  await request('http://localhost:4000/graphql', DELETE_ACCOUNT)
     .then((data) => {
       response.responseData = data.register;
       response.error = false;

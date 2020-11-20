@@ -23,14 +23,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard(props) {
   const classes = useStyles();
-  const [userID, setUserID] = useState('')
+  const [userID, setUserID] = useState('');
   async function onLoad() {
-    let currUser = await currentUser()
-    setUserID(currUser)
+    let currUser = await currentUser();
+    setUserID(currUser);
   }
   useEffect(() => {
-    onLoad()
-  }, [])
+    onLoad();
+  }, []);
   const { data, loading, error } = useQuery(USER_QUERY, {
     variables: { userID }
   });

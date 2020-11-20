@@ -8,9 +8,8 @@ import {
 } from '@material-ui/core';
 import { deepPurple } from '@material-ui/core/colors';
 import PantryCard from './PantryCard';
-import { useQuery } from '@apollo/react-hooks';
-import { USER_QUERY } from '../../APIFunctions/queries';
 import { currentUser } from '../../APIFunctions/auth';
+import { getProfile } from '../../APIFunctions/profile';
 
 const useStyles = makeStyles((theme) => ({
   profileText: {
@@ -56,30 +55,33 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Profile(props) {
   const classes = useStyles();
-  const [userID, setUserID] = useState('')
-  const [loadingPage, setIsLoading] = useState(true)
-  const userInfo = useQuery(USER_QUERY, {
-    variables: { userID }
-  });
+  const [user, setUser] = useState({});
+  const [loadingPage, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
+
   async function onLoad() {
-    let currUser = await currentUser()
-    setUserID(currUser)
-    setIsLoading(false)
+    let currUser = await currentUser();
+    let userInfo = await getProfile({ userID: currUser });
+    if (userInfo.error) {
+      setError(true);
+    } else {
+      setUser(userInfo.responseData);
+    }
+    setIsLoading(false);
   }
   useEffect(() => {
-    onLoad()
-  }, [])
-  if (userInfo.loading) {
+    onLoad();
+  }, []);
+  if (loadingPage) {
     return (
       <p>Loading...</p>
     );
   }
-  if (userInfo.error) {
+  if (error) {
     return (
       <p>Error</p>
     );
   }
-  const user = userInfo.data.userOne;
   return !loadingPage && (
     <>
       <h1 className={clsx(classes.profileText)}>Profile</h1>
@@ -95,7 +97,7 @@ export default function Profile(props) {
         </div>
         <div className={classes.viewPantryText}>
           <i>
-            {/* You have {user.pantries.length} pantries. */}
+            You have {user.pantries.length} pantries.
           </i>
         </div>
         <Grid
@@ -103,11 +105,13 @@ export default function Profile(props) {
           justify='center'
           className={classes.pantryDisplayWrapper}
         >
-          {/* {user.pantries.map((pantry, index) => (
-            <Grid item className={classes.pantryGrid} sm={12} lg={6}>
-              <PantryCard key={index} {...pantry} />
-            </Grid>
-          ))} */}
+          {user.pantries.map((pantry, index) => {
+            return (
+              <Grid item className={classes.pantryGrid} sm={12} lg={6}>
+                <PantryCard key={index} {...pantry} {...{ userID: user._id }} />
+              </Grid>
+            );
+          })}
         </Grid>
       </Paper>
     </>
