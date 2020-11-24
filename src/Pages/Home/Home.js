@@ -95,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
   },
   textbox: {
     margin: '0',
-    height: '150px',
+    minHeight: '150px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -125,7 +125,7 @@ const useStyles = makeStyles((theme) => ({
   definitionText: {
     ...theme.typography.fontWeightBold,
     ...theme.typography.h7,
-    width: '35em',
+    maxWidth: '35em',
   },
   mapRow: {
     display: 'flex',
@@ -176,10 +176,9 @@ const useStyles = makeStyles((theme) => ({
     margin: '4vh 4vw 4vh 4vw',
     justifyContent: 'center',
     alignItems: 'center',
-    maxHeight: '80px',
     minHeight: '80px',
     // maxWidth: '72px',
-    minWidth: '150px',
+    minWidth: '125px',
     flex: '50%',
     flexDirection: 'column',
     fontFamily: theme.typography.fontFamily,
@@ -192,6 +191,7 @@ const useStyles = makeStyles((theme) => ({
   aboutUsText: {
     padding: '4px',
     textAlign: 'left',
+    maxWidth: '25em'
   },
   disclaimerText: {
     margin: '0px',
@@ -323,24 +323,30 @@ export default function Home(props) {
           spacing={3}
           xs={12}
         >
-          <Typography
-            className={clsx(classes.typography, classes.subtitleText, classes.betterFont)}
-            inline
+          <Grid
+            item
+            spacing={3}
+            xs={12}
           >
-            <em>MANAGEMENT AND MONITORING TOOLS FOR YOUR Pantry</em>
-          </Typography>
-          <Typography
-            className={clsx(classes.typography, classes.headerText, classes.betterFont)}
-            inline
-          >
-            Tracking the items in your pantry has never been easier
-          </Typography>
-          <Typography
-            className={clsx(classes.typography, classes.definitionText, classes.betterFont)}
-            inline
-          >
-            Our Pantry tracking solution empowers users with one to several pantries to manage and view their pantries in real time.
-          </Typography>
+            <Typography
+              className={clsx(classes.typography, classes.subtitleText, classes.betterFont)}
+              inline
+            >
+              <em>MANAGEMENT AND MONITORING TOOLS FOR YOUR Pantry</em>
+            </Typography>
+            <Typography
+              className={clsx(classes.typography, classes.headerText, classes.betterFont)}
+              inline
+            >
+              Tracking the items in your pantry has never been easier
+            </Typography>
+            <Typography
+              className={clsx(classes.typography, classes.definitionText, classes.betterFont)}
+              inline
+            >
+              Our Pantry tracking solution empowers users with one to several pantries to manage and view their pantries in real time.
+            </Typography>
+          </Grid>
         </Grid>
         <Grid
           container
