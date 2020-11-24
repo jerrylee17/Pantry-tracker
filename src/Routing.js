@@ -68,7 +68,15 @@ export default function Routing(props) {
           }
         )
         }
-        <Route path="/*" component={Home} />
+        <Route path="/*"
+          render={() => (
+            <NavBarWrapper
+              component={Home}
+              {...props}
+              {...{ Authenticated, setAuthenticated }}
+            />)
+          }
+        />
       </Switch>
     </Router>)
   );

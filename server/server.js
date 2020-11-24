@@ -4,7 +4,7 @@ const { schema } = require('./src/schema/index.js');
 const cors = require('cors');
 
 require('dotenv').config();
-// require('./database.js');
+require('./database.js');
 
 // const { schema } = compose.schema;
 const server = new ApolloServer({
