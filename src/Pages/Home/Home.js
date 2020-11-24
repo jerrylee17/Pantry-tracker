@@ -191,7 +191,6 @@ const useStyles = makeStyles((theme) => ({
   aboutUsText: {
     padding: '4px',
     textAlign: 'left',
-    maxWidth: '25em'
   },
   disclaimerText: {
     margin: '0px',
