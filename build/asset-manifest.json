@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c7c4bc05.chunk.css",
+    "main.js": "/static/js/main.701cb52a.chunk.js",
+    "main.js.map": "/static/js/main.701cb52a.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.1be33307.js",
+    "runtime-main.js.map": "/static/js/runtime-main.1be33307.js.map",
+    "static/js/2.5b37a5d1.chunk.js": "/static/js/2.5b37a5d1.chunk.js",
+    "static/js/2.5b37a5d1.chunk.js.map": "/static/js/2.5b37a5d1.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.aaa8290e617d564bd2a498c6ed7c2d02.js": "/precache-manifest.aaa8290e617d564bd2a498c6ed7c2d02.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.c7c4bc05.chunk.css.map": "/static/css/main.c7c4bc05.chunk.css.map",
+    "static/js/2.5b37a5d1.chunk.js.LICENSE.txt": "/static/js/2.5b37a5d1.chunk.js.LICENSE.txt",
+    "static/media/background.jpg": "/static/media/background.3bb0ae4e.jpg",
+    "static/media/food_mid.svg": "/static/media/food_mid.f2cd2055.svg",
+    "static/media/harley.jpeg": "/static/media/harley.76844eaf.jpeg",
+    "static/media/map.svg": "/static/media/map.6af9e6fb.svg",
+    "static/media/pantrymanagement.svg": "/static/media/pantrymanagement.5d45e56b.svg",
+    "static/media/speed_left.svg": "/static/media/speed_left.442b56c0.svg",
+    "static/media/stats_right.svg": "/static/media/stats_right.c913e4a9.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1be33307.js",
+    "static/js/2.5b37a5d1.chunk.js",
+    "static/css/main.c7c4bc05.chunk.css",
+    "static/js/main.701cb52a.chunk.js"
+  ]
+}
