@@ -8,26 +8,26 @@ const { schema } = require('../schema/index.js');
     match up which is how we'll verify that it went through.
 */
 
-const mockPantryResponse = {
-    _id: '5fffff',
-    name: 'hi',
-    contents: [
-        'rice',
-        'crackers',
-        'am die',
-    ]
-}
+// const mockPantry = {
+//     _id: '5fffff',
+//     name: 'hi',
+//     contents: [
+//         'rice',
+//         'crackers',
+//         'am die',
+//     ]
+// }
 
 const mockPantry = {
-    pantry: () => ({
+    
         _id: () => '5233',
         name: () => 'hi',
         contents: () => [
             'rice',
             'crackers',
         ]
-    })
 }
+
 let pantryAPI = jest.fn(() => [mockPantryResponse]);
     
 const otherMock = {
@@ -43,16 +43,18 @@ const server = new ApolloServer({
 const { query, mutate } = createTestClient(server);
 
 test('does a simple pantry many query', async () => {
-    // const PANTRYMANY = gql`
-    //     pantryMany {
-    //         name
-    //     }
-    // `;
+    const PANTRYMANY = gql`
+    query {
+        pantryMany {
+            name
+        }
+    }
+    `;
 
-    const data = await query({ query: '{ pantryOne(filter: {name:"hi"}) { name } }' })
+    // const data = await query({ query: '{ pantryOne(filter: {name:"hi"}) { name } }' })
 
-    // const res = await query({ query: QUERY });
-    console.log(data);
+    const res = await query({ query: PANTRYMANY });
+    console.log(res);
     expect(2).toBe(2);
 
 });
