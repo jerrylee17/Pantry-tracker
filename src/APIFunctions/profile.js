@@ -1,7 +1,7 @@
 const { gql, request } = require('graphql-request');
 const { ApiResponse } = require('./ApiResponse');
 
-async function getProfile(data) {
+export async function getProfile(data) {
   const {
     userID
   } = data;
@@ -76,8 +76,3 @@ async function getProfile(data) {
     });
   return response;
 }
-
-
-module.exports = {
-  getProfile
-};
