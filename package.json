@@ -64,5 +64,6 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
-  }
+  },
+  "homepage": "."
 }
