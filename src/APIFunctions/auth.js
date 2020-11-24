@@ -3,14 +3,14 @@ const { ApiResponse } = require('./ApiResponse');
 const bcrypt = require('bcryptjs');
 
 // Returns current use ID
-async function currentUser() {
+export async function currentUser() {
   let token = window.localStorage.getItem('jwt');
   let base64Url = token.split('.')[1];
   let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   let jsonPayload = decodeURIComponent(
     atob(base64)
       .split('')
-      .map(function(c) {
+      .map(function (c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
       })
       .join('')
@@ -20,7 +20,7 @@ async function currentUser() {
   return user;
 }
 
-function isAuthenticated() {
+export function isAuthenticated() {
   let token = '';
   if (window.localStorage) {
     if (
@@ -33,7 +33,7 @@ function isAuthenticated() {
   return token;
 }
 
-async function login(data) {
+export async function login(data) {
   const {
     username,
     password
@@ -70,7 +70,7 @@ async function login(data) {
   return response;
 }
 
-async function register(data) {
+export async function register(data) {
   const {
     name,
     username,
@@ -105,7 +105,7 @@ async function register(data) {
   return response;
 }
 
-async function updateAccount(data) {
+export async function updateAccount(data) {
   const {
     userID,
     name,
@@ -155,7 +155,7 @@ async function updateAccount(data) {
   return response;
 }
 
-async function deleteAccount(data) {
+export async function deleteAccount(data) {
   const {
     userID
   } = data;
@@ -182,12 +182,3 @@ async function deleteAccount(data) {
     });
   return response;
 }
-
-module.exports = {
-  login,
-  register,
-  isAuthenticated,
-  currentUser,
-  deleteAccount,
-  updateAccount
-};
