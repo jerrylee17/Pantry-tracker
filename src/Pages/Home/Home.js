@@ -163,7 +163,7 @@ const useStyles = makeStyles((theme) => ({
     width: '250px',
   },
   map: {
-    width: '90vw',
+    width: '80vw',
   },
   learnAboutUsGrid: {
     display: 'flex',
