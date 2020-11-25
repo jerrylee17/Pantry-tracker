@@ -11,7 +11,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 // this link is a link to our graphql api, it creates the connection for the
 // frontend to our backend api
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/graphql'
+  uri: `${process.env.REACT_APP_API_URL}/graphql`
 });
 
 const client = new ApolloClient({
@@ -19,7 +19,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
   credentials: 'include'
 });
-
 
 function App() {
   return (

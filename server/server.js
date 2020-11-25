@@ -11,7 +11,6 @@ const server = new ApolloServer({
   schema,
   playground: true,
   introspection: true,
-
 });
 const app = express();
 app.use(cors());
