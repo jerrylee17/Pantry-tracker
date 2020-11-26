@@ -22,8 +22,7 @@ export const aboutData = {
     {
       name: 'Habib',
       description: `Habib Sorathia is a student at San Jose State University currently pursuing
-      a Bachelors of Science degree in Computer Engineering, a degree that he hopes will aid him
-      in obtaining a software engineering job in Silicon Valley.`,
+      a Bachelors of Science degree in Computer Engineering and hopes to get a job.`,
       picture: 'habib.jpeg',
     },
   ],
