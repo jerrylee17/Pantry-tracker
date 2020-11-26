@@ -90,7 +90,10 @@ export default function Profile(props) {
         className={classes.paper}
       >
         <div className={classes.avatarWrapper}>
-          <Avatar className={classes.avatar}>JL</Avatar>
+  <Avatar className={classes.avatar}>
+      {`${user.name.split(' ')[0][0].toUpperCase()}${user.name.split(' ')[1] 
+        ? user.name.split(' ')[1][0].toUpperCase() : ''}`}
+        </Avatar>
         </div>
         <div className={classes.welcomeText}>
           <h1>Welcome, {user.name.split(' ')[0]}</h1>
