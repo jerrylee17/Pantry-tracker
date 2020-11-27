@@ -50,7 +50,7 @@ export async function login(data) {
     }
   }`;
   let response = new ApiResponse();
-  await request('http://localhost:4000/graphql', LOGIN_QUERY)
+  await request(`${process.env.REACT_APP_API_URL}/graphql`, LOGIN_QUERY)
     .then((data) => {
       response.responseData = data.login;
       response.error = false;
@@ -94,7 +94,7 @@ export async function register(data) {
   `;
   let response = new ApiResponse();
   // Create user
-  await request('http://localhost:4000/graphql', REGISTER_MUTATION)
+  await request(`${process.env.REACT_APP_API_URL}/graphql`, REGISTER_MUTATION)
     .then((data) => {
       response.responseData = data.register;
       response.error = false;
@@ -144,7 +144,7 @@ export async function updateAccount(data) {
     }
   }`;
   let response = new ApiResponse();
-  await request('http://localhost:4000/graphql', UPDATE_USER)
+  await request(`${process.env.REACT_APP_API_URL}/graphql`, UPDATE_USER)
     .then((data) => {
       response.responseData = data.register;
       response.error = false;
@@ -172,7 +172,7 @@ export async function deleteAccount(data) {
   }
   `;
   let response = new ApiResponse();
-  await request('http://localhost:4000/graphql', DELETE_ACCOUNT)
+  await request(`${process.env.REACT_APP_API_URL}/graphql`, DELETE_ACCOUNT)
     .then((data) => {
       response.responseData = data.register;
       response.error = false;

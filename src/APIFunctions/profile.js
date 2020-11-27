@@ -30,7 +30,7 @@ export async function getProfile(data) {
       }
     }
   }`;
-  await request('http://localhost:4000/graphql', USER_QUERY)
+  await request(`${process.env.REACT_APP_API_URL}/graphql`, USER_QUERY)
     .then((data) => {
       response.responseData = data.userOne;
     })
@@ -38,7 +38,7 @@ export async function getProfile(data) {
       response.error = true;
       return response;
     });
-  await request('http://localhost:4000/graphql', USER_PANTRY_QUERY)
+  await request(`${process.env.REACT_APP_API_URL}/graphql`, USER_PANTRY_QUERY)
     .then((data) => {
       response.responseData.pantries = data.userPantriesOne ?
         data.userPantriesOne.pantries : [];
@@ -66,7 +66,7 @@ export async function getProfile(data) {
       }
     }
   }`;
-  await request('http://localhost:4000/graphql', PANTRY_CONTENTS_QUERY)
+  await request(`${process.env.REACT_APP_API_URL}/graphql`, PANTRY_CONTENTS_QUERY)
     .then((data) => {
       response.responseData.pantries = data.pantryContentsMany;
     })

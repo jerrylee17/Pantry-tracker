@@ -107,20 +107,21 @@ export default function VerticalTabs(props) {
           }
           const name = pantry.name;
           return (
-            <Tab label={
-              <>
-                <Typography variant='h5'>
-                  {` ${name}`}
-                </Typography>
-                <Hidden xsDown>
-                  <Typography varient='subtitle'>
-                    {pantrySizes[name] != null ? `${pantrySizes[name]} items` : 'Click to refresh'}
+            <Tab
+              label={
+                <>
+                  <Typography variant='h5'>
+                    {` ${name}`}
                   </Typography>
-                </Hidden>
-                <br /><br />
-              </>
-            }
-            {...a11yProps(index)}
+                  <Hidden xsDown>
+                    <Typography varient='subtitle'>
+                      {pantrySizes[name] != null ? `${pantrySizes[name]} items` : 'Click to refresh'}
+                    </Typography>
+                  </Hidden>
+                  <br /><br />
+                </>
+              }
+              {...a11yProps(index)}
             />
           );
         })}
@@ -131,19 +132,20 @@ export default function VerticalTabs(props) {
             </IconButton>
           </>
         }
-        {...a11yProps(pantries.length)}
+          {...a11yProps(pantries.length)}
         />
       </Tabs>
       {pantries.map((pantry, index) => {
         if (!pantry) return <></>;
-        return (<TabPanel
-          className={classes.tabPanel}
-          value={selectedTab} index={index}
-        >
-          <PantryTab
-            {...pantry} {...{ handlePantryLoad }}
-          />
-        </TabPanel>);
+        return (
+          <TabPanel
+            className={classes.tabPanel}
+            value={selectedTab} index={index}
+          >
+            <PantryTab
+              {...pantry} {...{ handlePantryLoad }}
+            />
+          </TabPanel>);
       })}
       <TabPanel
         className={classes.tabPanel}

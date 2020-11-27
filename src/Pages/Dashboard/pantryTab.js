@@ -14,6 +14,7 @@ import clsx from 'clsx';
 import { PANTRY_CONTENT_QUERY } from '../../APIFunctions/queries';
 import { useQuery } from 'react-apollo';
 import { FileCopyOutlined } from '@material-ui/icons';
+import { refreshPantry } from '../../APIFunctions/RefreshPantry';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -75,13 +76,20 @@ export default function PantryTab(props) {
   const pantryID = props._id;
   const [copyID, setCopyID] = useState(false)
   const { name, handlePantryLoad } = props;
-  const { data, loading, error } = useQuery(PANTRY_CONTENT_QUERY, {
-    variables: { pantryID }
-  });
+  const { data, loading, error, refetch } = useQuery(PANTRY_CONTENT_QUERY,
+    {
+      variables: { pantryID }
+    },
+    {
+      refetchOnWindowFocus: false,
+      enabled: false
+    }
+  );
 
   const contents = data && data.pantryContentsOne ? data.pantryContentsOne.contents : [];
 
   useEffect(() => {
+    refreshPantry({ pantryID, callback: () => refetch({ pantryID }) });
     handlePantryLoad(name, contents.length);
     // eslint-disable-next-line
   }, [name, contents.length])
@@ -96,8 +104,6 @@ export default function PantryTab(props) {
       Loading
     </>);
   }
-
-
 
 
   const copyPantryID = async () => {
@@ -140,8 +146,9 @@ export default function PantryTab(props) {
           classes.refreshButton,
           classes.refreshButtonPosition
         )}
-        onClick={() => {
-          // refresh pantry
+        onClick={async () => {
+          // await refreshPantry({ pantryID });
+          await refetch({ pantryID });
         }}
       >
         <Hidden mdDown>
